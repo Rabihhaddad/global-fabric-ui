@@ -13,7 +13,7 @@ export default function Dashboard() {
     const [searchTerm, setSearchTerm] = useState("");
     const [cloudFilter, setCloudFilter] = useState("All");
 
-    // 1. Fetch Data & Deduplicate via GPS
+    // 1. Fetch & Deduplicate (GPS-based)
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -21,54 +21,50 @@ export default function Dashboard() {
                 const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}?t=${cacheBuster}`);
                 const result = await response.json();
                 
-                const validData = (result.data || []).filter((item: any) => {
-                    if (!item?.Coordinates?.Lat || !item?.Coordinates?.Lon) return false;
-                    const lat = parseFloat(item.Coordinates.Lat);
-                    const lon = parseFloat(item.Coordinates.Lon);
-                    return !isNaN(lat) && !isNaN(lon) && lat >= -90 && lat <= 90 && lon >= -180 && lon <= 180;
-                });
-                
+                const rawData = result.data || [];
                 const uniqueFacilities = new Map();
-                validData.forEach((item: any) => {
-                    const op = (item.Operator || 'Unknown').trim().toLowerCase();
-                    const roundLat = parseFloat(item.Coordinates.Lat).toFixed(3);
-                    const roundLon = parseFloat(item.Coordinates.Lon).toFixed(3);
-                    const uniqueKey = `${op}::${roundLat},${roundLon}`;
+
+                rawData.forEach((item: any) => {
+                    if (!item?.Coordinates?.Lat || !item?.Coordinates?.Lon) return;
                     
-                    if (!uniqueFacilities.has(uniqueKey)) uniqueFacilities.set(uniqueKey, item);
+                    const op = (item.Operator || 'Unknown').trim().toLowerCase();
+                    const lat = parseFloat(item.Coordinates.Lat).toFixed(3);
+                    const lon = parseFloat(item.Coordinates.Lon).toFixed(3);
+                    const key = `${op}::${lat},${lon}`;
+                    
+                    if (!uniqueFacilities.has(key)) {
+                        uniqueFacilities.set(key, item);
+                    }
                 });
                 
-                const deduplicatedData = Array.from(uniqueFacilities.values());
-                deduplicatedData.sort((a: any, b: any) => (a.Operator || '').localeCompare(b.Operator || ''));
+                const cleanData = Array.from(uniqueFacilities.values());
+                cleanData.sort((a: any, b: any) => (a.Operator || '').localeCompare(b.Operator || ''));
                 
-                setFacilities(deduplicatedData);
-                setFilteredFacilities(deduplicatedData);
+                setFacilities(cleanData);
+                setFilteredFacilities(cleanData);
                 setLoading(false);
             } catch (error) {
-                console.error("Error fetching data:", error);
+                console.error("Fetch error:", error);
                 setLoading(false);
             }
         };
         fetchData();
     }, []);
 
-    // 2. Search & Filter Logic
+    // 2. Filter Logic
     useEffect(() => {
-        const lowercasedSearch = searchTerm.toLowerCase();
-        const filteredData = facilities.filter(item => {
-            const searchMatch = (item.Operator || '').toLowerCase().includes(lowercasedSearch) ||
-                                (item.FacilityName || '').toLowerCase().includes(lowercasedSearch);
-            let cloudMatch = true;
-            if (cloudFilter !== "All") {
-                const clouds = item.Clouds || [];
-                cloudMatch = clouds.some((c: string) => c.toLowerCase().includes(cloudFilter.toLowerCase()));
-            }
-            return searchMatch && cloudMatch;
+        const term = searchTerm.toLowerCase();
+        const filtered = facilities.filter(f => {
+            const matchesSearch = (f.Operator || '').toLowerCase().includes(term) || 
+                                 (f.FacilityName || '').toLowerCase().includes(term);
+            const matchesCloud = cloudFilter === "All" || 
+                                (f.Clouds || []).some((c: string) => c.toLowerCase().includes(cloudFilter.toLowerCase()));
+            return matchesSearch && matchesCloud;
         });
-        setFilteredFacilities(filteredData);
+        setFilteredFacilities(filtered);
     }, [searchTerm, cloudFilter, facilities]);
 
-    // 3. Init Map
+    // 3. Map Init
     useEffect(() => {
         if (typeof window === 'undefined' || !mapContainer.current || loading) return;
         const L = require('leaflet');
@@ -76,39 +72,21 @@ export default function Dashboard() {
 
         map.current = L.map(mapContainer.current, { preferCanvas: true }).setView([20, 0], 2);
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-            attribution: '&copy; OpenStreetMap &copy; CARTO',
-            subdomains: 'abcd',
-            maxZoom: 20
+            attribution: '&copy; CARTO',
+            maxZoom: 18
         }).addTo(map.current);
 
-        return () => {
-            if (map.current) { map.current.remove(); map.current = null; }
-        };
-    }, [loading]);
-
-    // 4. Draw Submarine Cables
-    useEffect(() => {
-        if (!map.current || typeof window === 'undefined' || loading) return;
-        const L = require('leaflet');
-
-        const fetchCables = async () => {
-            try {
-                const response = await fetch('https://raw.githubusercontent.com/telegeography/www.submarinecablemap.com/master/web/public/api/v3/cable/cable-geo.json');
-                const geojsonData = await response.json();
-                L.geoJSON(geojsonData, {
-                    style: { color: "#00ffff", weight: 1.5, opacity: 0.3, className: 'submarine-cable' },
-                    onEachFeature: (feature: any, layer: any) => {
-                        if (feature.properties && feature.properties.name) {
-                            layer.bindPopup(`<div style="color: #00ffff; font-family: monospace; font-size: 12px; background: #111; padding: 5px; border: 1px solid #00ffff;">🌊 <b>${feature.properties.name}</b></div>`, { className: 'custom-dark-popup' });
-                        }
-                    }
+        // 4. Submarine Cables Layer
+        fetch('https://raw.githubusercontent.com/telegeography/www.submarinecablemap.com/master/web/public/api/v3/cable/cable-geo.json')
+            .then(res => res.json())
+            .then(data => {
+                L.geoJSON(data, {
+                    style: { color: "#00ffff", weight: 1, opacity: 0.2 }
                 }).addTo(map.current);
-            } catch (error) { console.error("Failed to load cables:", error); }
-        };
-        setTimeout(fetchCables, 500);
+            });
     }, [loading]);
 
-    // 5. Draw Facility Pins
+    // 5. Draw Pins & Enhanced Popups
     useEffect(() => {
         if (!map.current || typeof window === 'undefined') return;
         const L = require('leaflet');
@@ -117,109 +95,76 @@ export default function Dashboard() {
             if (layer instanceof L.CircleMarker) map.current.removeLayer(layer);
         });
 
-        filteredFacilities.forEach((facility) => {
-            const lat = parseFloat(facility.Coordinates.Lat);
-            const lon = parseFloat(facility.Coordinates.Lon);
+        filteredFacilities.forEach((f) => {
+            const lat = parseFloat(f.Coordinates.Lat);
+            const lon = parseFloat(f.Coordinates.Lon);
 
-            const cloudsHTML = (facility.Clouds && facility.Clouds.length > 0) 
-                ? facility.Clouds.map((c: string) => `<span style="background:#003300; border:1px solid #00ff00; padding:2px 6px; border-radius:4px; margin:2px; display:inline-block; font-size:10px;">${c}</span>`).join('') 
-                : `<span style="color:#555; font-size:10px;">None</span>`;
+            const clouds = (f.Clouds || []).map((c: string) => 
+                `<span style="background:#002200; border:1px solid #00ff00; color:#00ff00; padding:2px 5px; border-radius:3px; margin:2px; display:inline-block; font-size:10px;">${c}</span>`
+            ).join('') || '<span style="color:#444; font-size:10px;">None</span>';
 
-            const ixpsHTML = (facility.IXPs && facility.IXPs.length > 0)
-                ? facility.IXPs.slice(0, 5).map((ix: string) => `<span style="background:#001a33; border:1px solid #0088ff; color: #88ccff; padding:2px 6px; border-radius:4px; margin:2px; display:inline-block; font-size:10px;">${ix}</span>`).join('') + (facility.IXPs.length > 5 ? `<span style="color:#888; font-size:10px;"> +${facility.IXPs.length - 5} more...</span>` : '')
-                : `<span style="color:#555; font-size:10px;">None</span>`;
+            const ixps = (f.IXPs || []).map((ix: string) => 
+                `<span style="background:#001a33; border:1px solid #0088ff; color:#88ccff; padding:2px 5px; border-radius:3px; margin:2px; display:inline-block; font-size:10px;">${ix}</span>`
+            ).join('') || '<span style="color:#444; font-size:10px;">None</span>';
 
-            const ispsHTML = (facility.ISPs && facility.ISPs.length > 0)
-                ? facility.ISPs.slice(0, 5).map((isp: string) => `<span style="background:#111; border:1px solid #444; padding:2px 6px; border-radius:4px; margin:2px; display:inline-block; font-size:10px;">${isp}</span>`).join('') + (facility.ISPs.length > 5 ? `<span style="color:#888; font-size:10px;"> +${facility.ISPs.length - 5} more...</span>` : '')
-                : `<span style="color:#555; font-size:10px;">None</span>`;
-
-            const popupContent = `
-                <div style="color: #e0e0e0; padding: 5px; font-family: monospace; min-width: 250px;">
-                    <h3 style="margin: 0 0 5px 0; font-size: 16px; color: #00ff00;">${facility.Operator || 'Unknown'}</h3>
-                    <div style="font-size: 12px; margin-bottom: 10px; border-bottom: 1px solid #333; padding-bottom: 10px;">
-                        <strong>${facility.FacilityName || facility.FacilityCode || 'N/A'}</strong>
-                    </div>
-                    <div style="margin-bottom: 8px;">
-                        <div style="font-size: 10px; color: #88ff88; margin-bottom: 3px;">☁️ CLOUD ON-RAMPS</div>
-                        <div>${cloudsHTML}</div>
-                    </div>
-                    <div style="margin-bottom: 8px;">
-                        <div style="font-size: 10px; color: #88ccff; margin-bottom: 3px;">⚡ INTERNET EXCHANGES</div>
-                        <div>${ixpsHTML}</div>
+            const popup = `
+                <div style="background:#111; color:#eee; font-family:monospace; min-width:200px;">
+                    <b style="color:#00ff00; font-size:14px;">${f.Operator}</b><br/>
+                    <small style="color:#888;">${f.FacilityName}</small>
+                    <hr style="border:0; border-top:1px solid #333; margin:8px 0;"/>
+                    <div style="margin-bottom:8px;">
+                        <div style="font-size:9px; color:#aaa; text-transform:uppercase;">Cloud On-Ramps</div>
+                        ${clouds}
                     </div>
                     <div>
-                        <div style="font-size: 10px; color: #88ff88; margin-bottom: 3px;">🌐 MAJOR NETWORKS</div>
-                        <div>${ispsHTML}</div>
+                        <div style="font-size:9px; color:#aaa; text-transform:uppercase;">Internet Exchanges</div>
+                        ${ixps}
                     </div>
                 </div>
             `;
 
-            L.circleMarker([lat, lon], { radius: 4, fillColor: "#00ff00", color: "#002200", weight: 1, opacity: 1, fillOpacity: 0.6 })
-            .bindPopup(popupContent, { maxWidth: 300, className: 'custom-dark-popup' })
-            .addTo(map.current);
+            L.circleMarker([lat, lon], {
+                radius: 4, fillColor: "#00ff00", color: "#000", weight: 1, fillOpacity: 0.7
+            }).bindPopup(popup).addTo(map.current);
         });
     }, [filteredFacilities]);
 
-    const flyToFacility = (lat: number, lon: number) => {
-        if (map.current) map.current.flyTo([lat, lon], 14, { duration: 1.5 });
+    const fly = (lat: number, lon: number) => {
+        map.current?.flyTo([lat, lon], 14);
     };
 
     return (
-        <div className="dashboard-container" style={{ display: 'flex', height: '100vh', width: '100vw', backgroundColor: '#0a0a0a', color: '#00ff00', fontFamily: 'monospace' }}>
-            <div className="sidebar" style={{ width: '350px', display: 'flex', flexDirection: 'column', borderRight: '1px solid #00ff00', zIndex: 10, backgroundColor: '#000' }}>
-                <div style={{ padding: '20px', borderBottom: '1px solid #00ff00' }}>
-                    <h1 style={{ fontSize: '18px', margin: '0 0 5px 0' }}>GLOBAL FABRIC</h1>
-                    <p style={{ margin: '0 0 15px 0', color: '#88ff88', fontSize: '12px' }}>Total Nodes: {loading ? '...' : filteredFacilities.length}</p>
-                    <input 
-                        type="text" 
-                        placeholder="Search Operator or Facility..." 
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                        style={{ width: '100%', padding: '10px', backgroundColor: '#111', color: '#00ff00', border: '1px solid #00ff00', outline: 'none', marginBottom: '10px' }}
-                    />
-                    <select 
-                        value={cloudFilter} 
-                        onChange={(e) => setCloudFilter(e.target.value)}
-                        style={{ width: '100%', padding: '10px', backgroundColor: '#111', color: '#00ff00', border: '1px solid #00ff00', outline: 'none', cursor: 'pointer' }}
-                    >
-                        <option value="All">All Cloud Ramps</option>
-                        <option value="AWS">AWS Direct Connect</option>
-                        <option value="Azure">Azure ExpressRoute</option>
-                        <option value="Google">Google Cloud Interconnect</option>
-                        <option value="Oracle">Oracle FastConnect</option>
-                        <option value="IBM">IBM Cloud Direct Link</option>
-                    </select>
-                </div>
-                <div style={{ flex: 1, overflowY: 'auto', padding: '10px' }}>
-                    {loading ? (
-                        <div style={{ padding: '20px', textAlign: 'center' }} className="animate-pulse">Extracting Global Data...</div>
-                    ) : (
-                        filteredFacilities.slice(0, 100).map((f, i) => ( 
-                            <div 
-                                key={i} 
-                                onClick={() => flyToFacility(parseFloat(f.Coordinates.Lat), parseFloat(f.Coordinates.Lon))}
-                                style={{ padding: '15px', marginBottom: '10px', backgroundColor: '#050505', border: '1px solid #003300', cursor: 'pointer', transition: 'all 0.2s' }}
-                                onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#002200'}
-                                onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#050505'}
-                            >
-                                <div style={{ fontWeight: 'bold', fontSize: '14px' }}>{f.Operator || 'Unknown'}</div>
-                                <div style={{ fontSize: '11px', color: '#88ff88', marginTop: '5px' }}>{f.FacilityName || f.FacilityCode || 'N/A'}</div>
-                            </div>
-                        ))
-                    )}
+        <div style={{ display: 'flex', height: '100vh', background: '#000', color: '#00ff00', fontFamily: 'monospace' }}>
+            <div style={{ width: '350px', borderRight: '1px solid #00ff00', display: 'flex', flexDirection: 'column', padding: '20px' }}>
+                <h2 style={{ margin: '0 0 10px 0' }}>GLOBAL FABRIC</h2>
+                <input 
+                    placeholder="Search..." 
+                    value={searchTerm} 
+                    onChange={e => setSearchTerm(e.target.value)}
+                    style={{ background: '#111', border: '1px solid #00ff00', color: '#00ff00', padding: '10px', marginBottom: '10px' }}
+                />
+                <select 
+                    value={cloudFilter} 
+                    onChange={e => setCloudFilter(e.target.value)}
+                    style={{ background: '#111', border: '1px solid #00ff00', color: '#00ff00', padding: '10px', marginBottom: '20px' }}
+                >
+                    <option value="All">All Clouds</option>
+                    <option value="AWS">AWS</option>
+                    <option value="Azure">Azure</option>
+                    <option value="Google">Google</option>
+                </select>
+                <div style={{ flex: 1, overflowY: 'auto' }}>
+                    {filteredFacilities.slice(0, 50).map((f, i) => (
+                        <div key={i} onClick={() => fly(f.Coordinates.Lat, f.Coordinates.Lon)} style={{ padding: '10px', borderBottom: '1px solid #222', cursor: 'pointer' }}>
+                            <b>{f.Operator}</b><br/><small style={{ color: '#666' }}>{f.FacilityName}</small>
+                        </div>
+                    ))}
                 </div>
             </div>
-            <div className="map-area" style={{ flex: 1, position: 'relative' }}>
-                <div ref={mapContainer} style={{ width: '100%', height: '100%', zIndex: 1 }} />
-            </div>
+            <div ref={mapContainer} style={{ flex: 1 }} />
             <style jsx global>{`
-                .leaflet-popup-content-wrapper, .leaflet-popup-tip { background: #111 !important; color: #fff !important; border: 1px solid #333; }
-                .leaflet-container a.leaflet-popup-close-button { color: #00ff00 !important; }
-                @media (max-width: 768px) {
-                    .dashboard-container { flex-direction: column !important; }
-                    .sidebar { width: 100% !important; height: 50vh !important; border-right: none !important; border-bottom: 2px solid #00ff00 !important; }
-                    .map-area { height: 50vh !important; }
-                }
+                .leaflet-popup-content-wrapper { background: #111 !important; border: 1px solid #333; }
+                .leaflet-popup-tip { background: #111 !important; }
             `}</style>
         </div>
     );
