@@ -10,162 +10,101 @@ export default function Dashboard() {
     const [filteredFacilities, setFilteredFacilities] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
     
+    // Filters
     const [searchTerm, setSearchTerm] = useState("");
-    const [cloudFilter, setCloudFilter] = useState("All");
+    const [filterType, setFilterType] = useState("Clouds"); // Clouds, ISPs, or IXPs
+    const [filterValue, setFilterValue] = useState("All");
 
-    // 1. Fetch & Deduplicate (GPS-based)
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const cacheBuster = new Date().getTime();
-                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}?t=${cacheBuster}`);
+                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}?t=${new Date().getTime()}`);
                 const result = await response.json();
-                
-                const rawData = result.data || [];
-                const uniqueFacilities = new Map();
-
-                rawData.forEach((item: any) => {
-                    if (!item?.Coordinates?.Lat || !item?.Coordinates?.Lon) return;
-                    
-                    const op = (item.Operator || 'Unknown').trim().toLowerCase();
-                    const lat = parseFloat(item.Coordinates.Lat).toFixed(3);
-                    const lon = parseFloat(item.Coordinates.Lon).toFixed(3);
-                    const key = `${op}::${lat},${lon}`;
-                    
-                    if (!uniqueFacilities.has(key)) {
-                        uniqueFacilities.set(key, item);
-                    }
+                const unique = new Map();
+                (result.data || []).forEach((f: any) => {
+                    const key = `${(f.Operator||'').toLowerCase()}::${parseFloat(f.Coordinates.Lat).toFixed(3)}`;
+                    if (!unique.has(key)) unique.set(key, f);
                 });
-                
-                const cleanData = Array.from(uniqueFacilities.values());
-                cleanData.sort((a: any, b: any) => (a.Operator || '').localeCompare(b.Operator || ''));
-                
-                setFacilities(cleanData);
-                setFilteredFacilities(cleanData);
+                const sorted = Array.from(unique.values()).sort((a,b) => (a.Operator||'').localeCompare(b.Operator||''));
+                setFacilities(sorted);
+                setFilteredFacilities(sorted);
                 setLoading(false);
-            } catch (error) {
-                console.error("Fetch error:", error);
-                setLoading(false);
-            }
+            } catch (e) { console.error(e); setLoading(false); }
         };
         fetchData();
     }, []);
 
-    // 2. Filter Logic
     useEffect(() => {
         const term = searchTerm.toLowerCase();
         const filtered = facilities.filter(f => {
-            const matchesSearch = (f.Operator || '').toLowerCase().includes(term) || 
-                                 (f.FacilityName || '').toLowerCase().includes(term);
-            const matchesCloud = cloudFilter === "All" || 
-                                (f.Clouds || []).some((c: string) => c.toLowerCase().includes(cloudFilter.toLowerCase()));
-            return matchesSearch && matchesCloud;
+            const matchesSearch = (f.Operator || '').toLowerCase().includes(term) || (f.FacilityName || '').toLowerCase().includes(term);
+            const categoryData = f[filterType] || [];
+            const matchesFilter = filterValue === "All" || categoryData.some((v: string) => v.toLowerCase().includes(filterValue.toLowerCase()));
+            return matchesSearch && matchesFilter;
         });
         setFilteredFacilities(filtered);
-    }, [searchTerm, cloudFilter, facilities]);
+    }, [searchTerm, filterType, filterValue, facilities]);
 
-    // 3. Map Init
     useEffect(() => {
         if (typeof window === 'undefined' || !mapContainer.current || loading) return;
         const L = require('leaflet');
-        if (map.current) return;
-
-        map.current = L.map(mapContainer.current, { preferCanvas: true }).setView([20, 0], 2);
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-            attribution: '&copy; CARTO',
-            maxZoom: 18
-        }).addTo(map.current);
-
-        // 4. Submarine Cables Layer
-        fetch('https://raw.githubusercontent.com/telegeography/www.submarinecablemap.com/master/web/public/api/v3/cable/cable-geo.json')
-            .then(res => res.json())
-            .then(data => {
-                L.geoJSON(data, {
-                    style: { color: "#00ffff", weight: 1, opacity: 0.2 }
-                }).addTo(map.current);
-            });
+        if (!map.current) {
+            map.current = L.map(mapContainer.current, { preferCanvas: true }).setView([20, 0], 2);
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png').addTo(map.current);
+            fetch('https://raw.githubusercontent.com/telegeography/www.submarinecablemap.com/master/web/public/api/v3/cable/cable-geo.json')
+                .then(r => r.json()).then(d => L.geoJSON(d, { style: { color: "#00ffff", weight: 1, opacity: 0.15 } }).addTo(map.current));
+        }
     }, [loading]);
 
-    // 5. Draw Pins & Enhanced Popups
     useEffect(() => {
         if (!map.current || typeof window === 'undefined') return;
         const L = require('leaflet');
-
-        map.current.eachLayer((layer: any) => {
-            if (layer instanceof L.CircleMarker) map.current.removeLayer(layer);
-        });
-
-        filteredFacilities.forEach((f) => {
-            const lat = parseFloat(f.Coordinates.Lat);
-            const lon = parseFloat(f.Coordinates.Lon);
-
-            const clouds = (f.Clouds || []).map((c: string) => 
-                `<span style="background:#002200; border:1px solid #00ff00; color:#00ff00; padding:2px 5px; border-radius:3px; margin:2px; display:inline-block; font-size:10px;">${c}</span>`
-            ).join('') || '<span style="color:#444; font-size:10px;">None</span>';
-
-            const ixps = (f.IXPs || []).map((ix: string) => 
-                `<span style="background:#001a33; border:1px solid #0088ff; color:#88ccff; padding:2px 5px; border-radius:3px; margin:2px; display:inline-block; font-size:10px;">${ix}</span>`
-            ).join('') || '<span style="color:#444; font-size:10px;">None</span>';
-
+        map.current.eachLayer((l: any) => { if (l instanceof L.CircleMarker) map.current.removeLayer(l); });
+        filteredFacilities.forEach(f => {
             const popup = `
                 <div style="background:#111; color:#eee; font-family:monospace; min-width:200px;">
-                    <b style="color:#00ff00; font-size:14px;">${f.Operator}</b><br/>
-                    <small style="color:#888;">${f.FacilityName}</small>
-                    <hr style="border:0; border-top:1px solid #333; margin:8px 0;"/>
-                    <div style="margin-bottom:8px;">
-                        <div style="font-size:9px; color:#aaa; text-transform:uppercase;">Cloud On-Ramps</div>
-                        ${clouds}
+                    <b style="color:#00ff00;">${f.Operator}</b><br/><small>${f.FacilityName}</small>
+                    <div style="margin-top:8px; font-size:10px;">
+                        <span style="color:#00ff00;">☁️</span> ${(f.Clouds||[]).slice(0,3).join(', ') || 'None'}<br/>
+                        <span style="color:#0088ff;">⚡</span> ${(f.IXPs||[]).slice(0,3).join(', ') || 'None'}<br/>
+                        <span style="color:#888;">🌐</span> ${(f.ISPs||[]).slice(0,2).join(', ')}...
                     </div>
-                    <div>
-                        <div style="font-size:9px; color:#aaa; text-transform:uppercase;">Internet Exchanges</div>
-                        ${ixps}
-                    </div>
-                </div>
-            `;
-
-            L.circleMarker([lat, lon], {
-                radius: 4, fillColor: "#00ff00", color: "#000", weight: 1, fillOpacity: 0.7
-            }).bindPopup(popup).addTo(map.current);
+                </div>`;
+            L.circleMarker([f.Coordinates.Lat, f.Coordinates.Lon], { radius: 4, fillColor: "#00ff00", color: "#000", weight: 1, fillOpacity: 0.7 }).bindPopup(popup).addTo(map.current);
         });
     }, [filteredFacilities]);
 
-    const fly = (lat: number, lon: number) => {
-        map.current?.flyTo([lat, lon], 14);
-    };
-
     return (
         <div style={{ display: 'flex', height: '100vh', background: '#000', color: '#00ff00', fontFamily: 'monospace' }}>
-            <div style={{ width: '350px', borderRight: '1px solid #00ff00', display: 'flex', flexDirection: 'column', padding: '20px' }}>
-                <h2 style={{ margin: '0 0 10px 0' }}>GLOBAL FABRIC</h2>
-                <input 
-                    placeholder="Search..." 
-                    value={searchTerm} 
-                    onChange={e => setSearchTerm(e.target.value)}
-                    style={{ background: '#111', border: '1px solid #00ff00', color: '#00ff00', padding: '10px', marginBottom: '10px' }}
-                />
-                <select 
-                    value={cloudFilter} 
-                    onChange={e => setCloudFilter(e.target.value)}
-                    style={{ background: '#111', border: '1px solid #00ff00', color: '#00ff00', padding: '10px', marginBottom: '20px' }}
-                >
-                    <option value="All">All Clouds</option>
-                    <option value="AWS">AWS</option>
-                    <option value="Azure">Azure</option>
-                    <option value="Google">Google</option>
+            <div style={{ width: '360px', borderRight: '1px solid #00ff00', display: 'flex', flexDirection: 'column', padding: '20px', zIndex: 10, background: '#000' }}>
+                <h2 style={{ margin: 0 }}>GLOBAL FABRIC</h2>
+                <div style={{ color: '#88ff88', fontSize: '12px', marginBottom: '20px' }}>Active Nodes: {filteredFacilities.length}</div>
+                
+                <input placeholder="Search Operator..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} style={{ background: '#111', border: '1px solid #00ff00', color: '#00ff00', padding: '10px', marginBottom: '10px' }} />
+                
+                <div style={{ display: 'flex', gap: '5px', marginBottom: '10px' }}>
+                    {['Clouds', 'IXPs', 'ISPs'].map(t => (
+                        <button key={t} onClick={() => { setFilterType(t); setFilterValue("All"); }} style={{ flex: 1, background: filterType === t ? '#00ff00' : '#111', color: filterType === t ? '#000' : '#00ff00', border: '1px solid #00ff00', cursor: 'pointer', fontSize: '10px', padding: '5px' }}>{t}</button>
+                    ))}
+                </div>
+
+                <select value={filterValue} onChange={e => setFilterValue(e.target.value)} style={{ background: '#111', border: '1px solid #00ff00', color: '#00ff00', padding: '10px', marginBottom: '20px' }}>
+                    <option value="All">All {filterType}</option>
+                    {filterType === 'Clouds' && ['AWS', 'Azure', 'Google', 'Oracle'].map(v => <option key={v} value={v}>{v}</option>)}
+                    {filterType === 'IXPs' && ['DE-CIX', 'Equinix', 'LINX', 'AMS-IX'].map(v => <option key={v} value={v}>{v}</option>)}
+                    {filterType === 'ISPs' && ['Cogent', 'Lumen', 'Verizon', 'AT&T', 'Comcast'].map(v => <option key={v} value={v}>{v}</option>)}
                 </select>
+
                 <div style={{ flex: 1, overflowY: 'auto' }}>
-                    {filteredFacilities.slice(0, 50).map((f, i) => (
-                        <div key={i} onClick={() => fly(f.Coordinates.Lat, f.Coordinates.Lon)} style={{ padding: '10px', borderBottom: '1px solid #222', cursor: 'pointer' }}>
+                    {filteredFacilities.slice(0, 100).map((f, i) => (
+                        <div key={i} onClick={() => map.current?.flyTo([f.Coordinates.Lat, f.Coordinates.Lon], 14)} style={{ padding: '10px', borderBottom: '1px solid #222', cursor: 'pointer' }}>
                             <b>{f.Operator}</b><br/><small style={{ color: '#666' }}>{f.FacilityName}</small>
                         </div>
                     ))}
                 </div>
             </div>
             <div ref={mapContainer} style={{ flex: 1 }} />
-            <style jsx global>{`
-                .leaflet-popup-content-wrapper { background: #111 !important; border: 1px solid #333; }
-                .leaflet-popup-tip { background: #111 !important; }
-            `}</style>
+            <style jsx global>{`.leaflet-popup-content-wrapper { background: #111 !important; border: 1px solid #333; } .leaflet-popup-tip { background: #111 !important; }`}</style>
         </div>
     );
 }

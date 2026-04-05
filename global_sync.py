@@ -1,82 +1,86 @@
 import requests
 import boto3
 from decimal import Decimal
+import time
 
 dynamodb = boto3.resource('dynamodb')
 table = dynamodb.Table('GlobalFabric')
 
-def fetch_peeringdb(endpoint):
-    print(f"📡 Downloading {endpoint}...")
-    response = requests.get(f"https://www.peeringdb.com/api/{endpoint}?limit=0")
-    response.raise_for_status()
-    return response.json()['data']
-
-def sync_global_fabric():
-    print("🚀 STARTING FORCE SYNC...")
+def fetch(ep):
+    # Added headers and retry logic to prevent 'KeyError'
+    headers = {'User-Agent': 'GlobalFabricSync/2.0 (Contact: rob@packetrobasn.com)'}
+    url = f"https://www.peeringdb.com/api/{ep}?limit=0"
     
-    # Get all the tables
-    facs = fetch_peeringdb('fac')
-    nets = fetch_peeringdb('net')
-    netfacs = fetch_peeringdb('netfac')
-    ixs = fetch_peeringdb('ix')
-    ixfacs = fetch_peeringdb('ixfac')
-
-    # Build Lookups
-    net_lookup = {n['id']: n['name'] for n in nets}
-    ix_lookup = {i['id']: i['name'] for i in ixs}
+    for attempt in range(3):
+        try:
+            print(f"📡 Pulling {ep} (Attempt {attempt + 1})...")
+            response = requests.get(url, headers=headers, timeout=30)
+            data = response.json()
+            if 'data' in data:
+                return data['data']
+            else:
+                print(f"⚠️ Unexpected response for {ep}: {data}")
+        except Exception as e:
+            print(f"❌ Error pulling {ep}: {e}")
+        
+        time.sleep(5) # Wait 5 seconds before retrying
     
-    # Map Facilities to Networks
-    fac_to_nets = {}
-    for nf in netfacs:
+    raise Exception(f"Failed to fetch {ep} after 3 attempts.")
+
+def sync():
+    # 1. Fetching all data with improved reliability
+    try:
+        facs = fetch('fac')
+        nets = fetch('net')
+        nfs = fetch('netfac')
+        ixs = fetch('ix')
+        ifs = fetch('ixfac')
+    except Exception as e:
+        print(f"⛔ Sync aborted: {e}")
+        return
+
+    print("🧠 Processing relationships...")
+    net_map = {n['id']: n['name'] for n in nets}
+    ix_map = {i['id']: i['name'] for i in ixs}
+    
+    f_nets, f_ixs = {}, {}
+    for nf in nfs:
         f_id = nf['fac_id']
-        name = net_lookup.get(nf['net_id'], "Unknown")
-        if f_id not in fac_to_nets: fac_to_nets[f_id] = []
-        fac_to_nets[f_id].append(name)
+        name = net_map.get(nf['net_id'], "Unknown")
+        f_nets.setdefault(f_id, []).append(name)
+    for ifc in ifs:
+        f_id = ifc['fac_id']
+        name = ix_map.get(ifc['ix_id'], "Unknown")
+        f_ixs.setdefault(f_id, []).append(name)
 
-    # Map Facilities to IXPs
-    fac_to_ixs = {}
-    for ixf in ixfacs:
-        f_id = ixf['fac_id']
-        name = ix_lookup.get(ixf['ix_id'], "Unknown")
-        if f_id not in fac_to_ixs: fac_to_ixs[f_id] = []
-        fac_to_ixs[f_id].append(name)
+    # Expanded cloud list for better filtering
+    cloud_keys = ['aws', 'amazon', 'google', 'azure', 'microsoft', 'oracle', 'alibaba', 'ibm', 'cloudflare', 'akamai', 'digitalocean']
 
-    print(f"🔄 Processing {len(facs)} facilities...")
-    cloud_keys = ['aws', 'amazon', 'google', 'azure', 'microsoft', 'oracle', 'alibaba', 'ibm']
-    
+    print(f"🚀 Pushing records to DynamoDB...")
     with table.batch_writer() as batch:
         for i, fac in enumerate(facs):
-            f_id = fac['id']
+            fid = fac['id']
             lat, lon = fac.get('latitude'), fac.get('longitude')
             if not lat or not lon: continue
 
-            all_nets = fac_to_nets.get(f_id, [])
-            # Deduplicate names and strip whitespace
-            clouds = sorted(list(set([n for n in all_nets if any(k in n.lower() for k in cloud_keys)])))
-            isps = sorted(list(set([n for n in all_nets if n not in clouds])))
-            ixps = sorted(list(set(fac_to_ixs.get(f_id, []))))
+            all_n = list(set(f_nets.get(fid, [])))
+            clouds = sorted([n for n in all_n if any(k in n.lower() for k in cloud_keys)])
+            isps = sorted([n for n in all_n if n not in clouds])
+            ixps = sorted(list(set(f_ixs.get(fid, []))))
 
-            # This structure matches exactly what the frontend expects
-            item = {
-                'PK': f"COUNTRY#{fac.get('country', 'XX').upper()}",
-                'SK': f"STATE#{(fac.get('state') or 'UNKNOWN').upper()}#FAC#{f_id}",
-                'FacID': f_id,
-                'Operator': fac.get('org_name', 'Unknown Operator'),
-                'FacilityName': fac.get('name', 'Unknown Facility'),
-                'Coordinates': {
-                    'Lat': Decimal(str(lat)),
-                    'Lon': Decimal(str(lon))
-                },
+            batch.put_item(Item={
+                'PK': f"COUNTRY#{fac.get('country','XX').upper()}",
+                'SK': f"FAC#{fid}",
+                'Operator': fac.get('org_name', 'Unknown'),
+                'FacilityName': fac.get('name', 'Unknown'),
+                'Coordinates': {'Lat': Decimal(str(lat)), 'Lon': Decimal(str(lon))},
                 'Clouds': clouds,
                 'ISPs': isps,
-                'IXPs': ixps  # Ensure this matches the frontend variable name
-            }
-            batch.put_item(Item=item)
-            
-            if i % 1000 == 0:
-                print(f"  ✅ Synced {i} records...")
+                'IXPs': ixps
+            })
+            if i % 1000 == 0: print(f"  ✅ Progress: {i} nodes synced...")
 
-    print("🏁 FORCE SYNC COMPLETE.")
+    print("🏁 Final Sync Successful.")
 
 if __name__ == '__main__':
-    sync_global_fabric()
+    sync()
