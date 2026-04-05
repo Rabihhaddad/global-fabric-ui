@@ -1,4 +1,3 @@
-cat << 'EOF' > app/page.tsx
 "use client";
 
 import React, { useEffect, useRef, useState } from 'react';
@@ -11,18 +10,17 @@ export default function Dashboard() {
     const [filteredFacilities, setFilteredFacilities] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
     
-    // Filter States
     const [searchTerm, setSearchTerm] = useState("");
     const [cloudFilter, setCloudFilter] = useState("All");
 
-    // 1. Fetch Global Data & Deduplicate
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}`);
+                // ADDED CACHE BUSTER: Forces the browser to pull fresh data
+                const cacheBuster = new Date().getTime();
+                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}?t=${cacheBuster}`);
                 const result = await response.json();
                 
-                // Remove records without valid GPS coordinates
                 const validData = (result.data || []).filter((item: any) => {
                     if (!item?.Coordinates?.Lat || !item?.Coordinates?.Lon) return false;
                     const lat = parseFloat(item.Coordinates.Lat);
@@ -30,21 +28,22 @@ export default function Dashboard() {
                     return !isNaN(lat) && !isNaN(lon) && lat >= -90 && lat <= 90 && lon >= -180 && lon <= 180;
                 });
                 
-                // THE DEDUPLICATION ENGINE
+                // THE GPS DEDUPLICATION ENGINE
                 const uniqueFacilities = new Map();
                 validData.forEach((item: any) => {
-                    // Create a strict visual fingerprint (Operator + Facility Name)
                     const op = (item.Operator || 'Unknown').trim().toLowerCase();
-                    const fn = (item.FacilityName || 'Unknown').trim().toLowerCase();
-                    const uniqueKey = `${op}::${fn}`;
+                    // Round Lat/Lon to 3 decimal places (~100 meter accuracy)
+                    const roundLat = parseFloat(item.Coordinates.Lat).toFixed(3);
+                    const roundLon = parseFloat(item.Coordinates.Lon).toFixed(3);
                     
-                    // Only save the first instance of this building we see
+                    // Unique Fingerprint = Operator Name + Rounded GPS Location
+                    const uniqueKey = `${op}::${roundLat},${roundLon}`;
+                    
                     if (!uniqueFacilities.has(uniqueKey)) {
                         uniqueFacilities.set(uniqueKey, item);
                     }
                 });
                 
-                // Convert clean map back to array and sort alphabetically
                 const deduplicatedData = Array.from(uniqueFacilities.values());
                 deduplicatedData.sort((a: any, b: any) => (a.Operator || '').localeCompare(b.Operator || ''));
                 
@@ -59,37 +58,27 @@ export default function Dashboard() {
         fetchData();
     }, []);
 
-    // 2. Multi-Layer Filtering Logic
     useEffect(() => {
         const lowercasedSearch = searchTerm.toLowerCase();
-        
         const filteredData = facilities.filter(item => {
-            // Text Search Match
             const searchMatch = (item.Operator || '').toLowerCase().includes(lowercasedSearch) ||
                                 (item.FacilityName || '').toLowerCase().includes(lowercasedSearch);
-            
-            // Cloud On-Ramp Match
             let cloudMatch = true;
             if (cloudFilter !== "All") {
                 const clouds = item.Clouds || [];
                 cloudMatch = clouds.some((c: string) => c.toLowerCase().includes(cloudFilter.toLowerCase()));
             }
-
             return searchMatch && cloudMatch;
         });
-        
         setFilteredFacilities(filteredData);
     }, [searchTerm, cloudFilter, facilities]);
 
-    // 3. Initialize Global Map
     useEffect(() => {
         if (typeof window === 'undefined' || !mapContainer.current || loading) return;
         const L = require('leaflet');
-
         if (map.current) return;
 
         map.current = L.map(mapContainer.current, { preferCanvas: true }).setView([20, 0], 2);
-
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
             attribution: '&copy; OpenStreetMap &copy; CARTO',
             subdomains: 'abcd',
@@ -104,7 +93,6 @@ export default function Dashboard() {
         };
     }, [loading]);
 
-    // 4. Draw Pins
     useEffect(() => {
         if (!map.current || typeof window === 'undefined') return;
         const L = require('leaflet');
@@ -165,14 +153,10 @@ export default function Dashboard() {
 
     return (
         <div className="dashboard-container" style={{ display: 'flex', height: '100vh', width: '100vw', backgroundColor: '#0a0a0a', color: '#00ff00', fontFamily: 'monospace' }}>
-            
-            {/* LEFT SIDEBAR */}
             <div className="sidebar" style={{ width: '350px', display: 'flex', flexDirection: 'column', borderRight: '1px solid #00ff00', zIndex: 10, backgroundColor: '#000' }}>
                 <div style={{ padding: '20px', borderBottom: '1px solid #00ff00' }}>
                     <h1 style={{ fontSize: '18px', margin: '0 0 5px 0' }}>GLOBAL FABRIC</h1>
                     <p style={{ margin: '0 0 15px 0', color: '#88ff88', fontSize: '12px' }}>Total Nodes: {loading ? '...' : filteredFacilities.length}</p>
-                    
-                    {/* Search Bar */}
                     <input 
                         type="text" 
                         placeholder="Search Operator or Facility..." 
@@ -180,8 +164,6 @@ export default function Dashboard() {
                         onChange={(e) => setSearchTerm(e.target.value)}
                         style={{ width: '100%', padding: '10px', backgroundColor: '#111', color: '#00ff00', border: '1px solid #00ff00', outline: 'none', marginBottom: '10px' }}
                     />
-
-                    {/* Cloud Filter Dropdown */}
                     <select 
                         value={cloudFilter} 
                         onChange={(e) => setCloudFilter(e.target.value)}
@@ -195,7 +177,6 @@ export default function Dashboard() {
                         <option value="IBM">IBM Cloud Direct Link</option>
                     </select>
                 </div>
-                
                 <div style={{ flex: 1, overflowY: 'auto', padding: '10px' }}>
                     {loading ? (
                         <div style={{ padding: '20px', textAlign: 'center' }} className="animate-pulse">Extracting Global Data...</div>
@@ -215,22 +196,12 @@ export default function Dashboard() {
                     )}
                 </div>
             </div>
-
-            {/* RIGHT MAP AREA */}
             <div className="map-area" style={{ flex: 1, position: 'relative' }}>
                 <div ref={mapContainer} style={{ width: '100%', height: '100%', zIndex: 1 }} />
             </div>
-
-            {/* Global CSS for Mobile Responsiveness & Dark Popups */}
             <style jsx global>{`
-                .leaflet-popup-content-wrapper, .leaflet-popup-tip {
-                    background: #111 !important;
-                    color: #fff !important;
-                    border: 1px solid #333;
-                }
+                .leaflet-popup-content-wrapper, .leaflet-popup-tip { background: #111 !important; color: #fff !important; border: 1px solid #333; }
                 .leaflet-container a.leaflet-popup-close-button { color: #00ff00 !important; }
-                
-                /* Mobile Layout Switch */
                 @media (max-width: 768px) {
                     .dashboard-container { flex-direction: column !important; }
                     .sidebar { width: 100% !important; height: 50vh !important; border-right: none !important; border-bottom: 2px solid #00ff00 !important; }
@@ -240,4 +211,3 @@ export default function Dashboard() {
         </div>
     );
 }
-EOF
