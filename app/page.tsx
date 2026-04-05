@@ -1,3 +1,4 @@
+cat << 'EOF' > app/page.tsx
 "use client";
 
 import React, { useEffect, useRef, useState } from 'react';
@@ -14,13 +15,14 @@ export default function Dashboard() {
     const [searchTerm, setSearchTerm] = useState("");
     const [cloudFilter, setCloudFilter] = useState("All");
 
-    // 1. Fetch Global Data
+    // 1. Fetch Global Data & Deduplicate
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}`);
                 const result = await response.json();
                 
+                // Remove records without valid GPS coordinates
                 const validData = (result.data || []).filter((item: any) => {
                     if (!item?.Coordinates?.Lat || !item?.Coordinates?.Lon) return false;
                     const lat = parseFloat(item.Coordinates.Lat);
@@ -28,10 +30,26 @@ export default function Dashboard() {
                     return !isNaN(lat) && !isNaN(lon) && lat >= -90 && lat <= 90 && lon >= -180 && lon <= 180;
                 });
                 
-                validData.sort((a: any, b: any) => (a.Operator || '').localeCompare(b.Operator || ''));
+                // THE DEDUPLICATION ENGINE
+                const uniqueFacilities = new Map();
+                validData.forEach((item: any) => {
+                    // Create a strict visual fingerprint (Operator + Facility Name)
+                    const op = (item.Operator || 'Unknown').trim().toLowerCase();
+                    const fn = (item.FacilityName || 'Unknown').trim().toLowerCase();
+                    const uniqueKey = `${op}::${fn}`;
+                    
+                    // Only save the first instance of this building we see
+                    if (!uniqueFacilities.has(uniqueKey)) {
+                        uniqueFacilities.set(uniqueKey, item);
+                    }
+                });
                 
-                setFacilities(validData);
-                setFilteredFacilities(validData);
+                // Convert clean map back to array and sort alphabetically
+                const deduplicatedData = Array.from(uniqueFacilities.values());
+                deduplicatedData.sort((a: any, b: any) => (a.Operator || '').localeCompare(b.Operator || ''));
+                
+                setFacilities(deduplicatedData);
+                setFilteredFacilities(deduplicatedData);
                 setLoading(false);
             } catch (error) {
                 console.error("Error fetching data:", error);
@@ -182,7 +200,7 @@ export default function Dashboard() {
                     {loading ? (
                         <div style={{ padding: '20px', textAlign: 'center' }} className="animate-pulse">Extracting Global Data...</div>
                     ) : (
-                        filteredFacilities.slice(0, 100).map((f, i) => ( // Show top 100 in sidebar to prevent DOM lag
+                        filteredFacilities.slice(0, 100).map((f, i) => ( 
                             <div 
                                 key={i} 
                                 onClick={() => flyToFacility(parseFloat(f.Coordinates.Lat), parseFloat(f.Coordinates.Lon))}
@@ -222,3 +240,4 @@ export default function Dashboard() {
         </div>
     );
 }
+EOF
