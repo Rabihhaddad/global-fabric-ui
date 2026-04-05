@@ -13,10 +13,10 @@ export default function Dashboard() {
     const [searchTerm, setSearchTerm] = useState("");
     const [cloudFilter, setCloudFilter] = useState("All");
 
+    // 1. Fetch Data & Deduplicate via GPS
     useEffect(() => {
         const fetchData = async () => {
             try {
-                // ADDED CACHE BUSTER: Forces the browser to pull fresh data
                 const cacheBuster = new Date().getTime();
                 const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}?t=${cacheBuster}`);
                 const result = await response.json();
@@ -28,20 +28,14 @@ export default function Dashboard() {
                     return !isNaN(lat) && !isNaN(lon) && lat >= -90 && lat <= 90 && lon >= -180 && lon <= 180;
                 });
                 
-                // THE GPS DEDUPLICATION ENGINE
                 const uniqueFacilities = new Map();
                 validData.forEach((item: any) => {
                     const op = (item.Operator || 'Unknown').trim().toLowerCase();
-                    // Round Lat/Lon to 3 decimal places (~100 meter accuracy)
                     const roundLat = parseFloat(item.Coordinates.Lat).toFixed(3);
                     const roundLon = parseFloat(item.Coordinates.Lon).toFixed(3);
-                    
-                    // Unique Fingerprint = Operator Name + Rounded GPS Location
                     const uniqueKey = `${op}::${roundLat},${roundLon}`;
                     
-                    if (!uniqueFacilities.has(uniqueKey)) {
-                        uniqueFacilities.set(uniqueKey, item);
-                    }
+                    if (!uniqueFacilities.has(uniqueKey)) uniqueFacilities.set(uniqueKey, item);
                 });
                 
                 const deduplicatedData = Array.from(uniqueFacilities.values());
@@ -58,6 +52,7 @@ export default function Dashboard() {
         fetchData();
     }, []);
 
+    // 2. Search & Filter Logic
     useEffect(() => {
         const lowercasedSearch = searchTerm.toLowerCase();
         const filteredData = facilities.filter(item => {
@@ -73,6 +68,7 @@ export default function Dashboard() {
         setFilteredFacilities(filteredData);
     }, [searchTerm, cloudFilter, facilities]);
 
+    // 3. Init Map
     useEffect(() => {
         if (typeof window === 'undefined' || !mapContainer.current || loading) return;
         const L = require('leaflet');
@@ -86,21 +82,39 @@ export default function Dashboard() {
         }).addTo(map.current);
 
         return () => {
-            if (map.current) {
-                map.current.remove();
-                map.current = null;
-            }
+            if (map.current) { map.current.remove(); map.current = null; }
         };
     }, [loading]);
 
+    // 4. Draw Submarine Cables
+    useEffect(() => {
+        if (!map.current || typeof window === 'undefined' || loading) return;
+        const L = require('leaflet');
+
+        const fetchCables = async () => {
+            try {
+                const response = await fetch('https://raw.githubusercontent.com/telegeography/www.submarinecablemap.com/master/web/public/api/v3/cable/cable-geo.json');
+                const geojsonData = await response.json();
+                L.geoJSON(geojsonData, {
+                    style: { color: "#00ffff", weight: 1.5, opacity: 0.3, className: 'submarine-cable' },
+                    onEachFeature: (feature: any, layer: any) => {
+                        if (feature.properties && feature.properties.name) {
+                            layer.bindPopup(`<div style="color: #00ffff; font-family: monospace; font-size: 12px; background: #111; padding: 5px; border: 1px solid #00ffff;">🌊 <b>${feature.properties.name}</b></div>`, { className: 'custom-dark-popup' });
+                        }
+                    }
+                }).addTo(map.current);
+            } catch (error) { console.error("Failed to load cables:", error); }
+        };
+        setTimeout(fetchCables, 500);
+    }, [loading]);
+
+    // 5. Draw Facility Pins
     useEffect(() => {
         if (!map.current || typeof window === 'undefined') return;
         const L = require('leaflet');
 
         map.current.eachLayer((layer: any) => {
-            if (layer instanceof L.CircleMarker) {
-                map.current.removeLayer(layer);
-            }
+            if (layer instanceof L.CircleMarker) map.current.removeLayer(layer);
         });
 
         filteredFacilities.forEach((facility) => {
@@ -109,6 +123,10 @@ export default function Dashboard() {
 
             const cloudsHTML = (facility.Clouds && facility.Clouds.length > 0) 
                 ? facility.Clouds.map((c: string) => `<span style="background:#003300; border:1px solid #00ff00; padding:2px 6px; border-radius:4px; margin:2px; display:inline-block; font-size:10px;">${c}</span>`).join('') 
+                : `<span style="color:#555; font-size:10px;">None</span>`;
+
+            const ixpsHTML = (facility.IXPs && facility.IXPs.length > 0)
+                ? facility.IXPs.slice(0, 5).map((ix: string) => `<span style="background:#001a33; border:1px solid #0088ff; color: #88ccff; padding:2px 6px; border-radius:4px; margin:2px; display:inline-block; font-size:10px;">${ix}</span>`).join('') + (facility.IXPs.length > 5 ? `<span style="color:#888; font-size:10px;"> +${facility.IXPs.length - 5} more...</span>` : '')
                 : `<span style="color:#555; font-size:10px;">None</span>`;
 
             const ispsHTML = (facility.ISPs && facility.ISPs.length > 0)
@@ -125,6 +143,10 @@ export default function Dashboard() {
                         <div style="font-size: 10px; color: #88ff88; margin-bottom: 3px;">☁️ CLOUD ON-RAMPS</div>
                         <div>${cloudsHTML}</div>
                     </div>
+                    <div style="margin-bottom: 8px;">
+                        <div style="font-size: 10px; color: #88ccff; margin-bottom: 3px;">⚡ INTERNET EXCHANGES</div>
+                        <div>${ixpsHTML}</div>
+                    </div>
                     <div>
                         <div style="font-size: 10px; color: #88ff88; margin-bottom: 3px;">🌐 MAJOR NETWORKS</div>
                         <div>${ispsHTML}</div>
@@ -132,23 +154,14 @@ export default function Dashboard() {
                 </div>
             `;
 
-            L.circleMarker([lat, lon], {
-                radius: 4,
-                fillColor: "#00ff00",
-                color: "#002200",
-                weight: 1,
-                opacity: 1,
-                fillOpacity: 0.6
-            })
+            L.circleMarker([lat, lon], { radius: 4, fillColor: "#00ff00", color: "#002200", weight: 1, opacity: 1, fillOpacity: 0.6 })
             .bindPopup(popupContent, { maxWidth: 300, className: 'custom-dark-popup' })
             .addTo(map.current);
         });
     }, [filteredFacilities]);
 
     const flyToFacility = (lat: number, lon: number) => {
-        if (map.current) {
-            map.current.flyTo([lat, lon], 14, { duration: 1.5 });
-        }
+        if (map.current) map.current.flyTo([lat, lon], 14, { duration: 1.5 });
     };
 
     return (
