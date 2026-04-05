@@ -10,9 +10,8 @@ export default function Dashboard() {
     const [filteredFacilities, setFilteredFacilities] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
     
-    // Filters
     const [searchTerm, setSearchTerm] = useState("");
-    const [filterType, setFilterType] = useState("Clouds"); // Clouds, ISPs, or IXPs
+    const [filterType, setFilterType] = useState("Clouds");
     const [filterValue, setFilterValue] = useState("All");
 
     useEffect(() => {
@@ -20,16 +19,26 @@ export default function Dashboard() {
             try {
                 const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}?t=${new Date().getTime()}`);
                 const result = await response.json();
+                
+                // HARDENED CHECK: Only allow facilities that actually have Coordinates
+                const valid = (result.data || []).filter((f: any) => 
+                    f.Coordinates && f.Coordinates.Lat && f.Coordinates.Lon
+                );
+
                 const unique = new Map();
-                (result.data || []).forEach((f: any) => {
+                valid.forEach((f: any) => {
                     const key = `${(f.Operator||'').toLowerCase()}::${parseFloat(f.Coordinates.Lat).toFixed(3)}`;
                     if (!unique.has(key)) unique.set(key, f);
                 });
+
                 const sorted = Array.from(unique.values()).sort((a,b) => (a.Operator||'').localeCompare(b.Operator||''));
                 setFacilities(sorted);
                 setFilteredFacilities(sorted);
                 setLoading(false);
-            } catch (e) { console.error(e); setLoading(false); }
+            } catch (e) { 
+                console.error("Data Fetch Error:", e); 
+                setLoading(false); 
+            }
         };
         fetchData();
     }, []);
@@ -51,8 +60,11 @@ export default function Dashboard() {
         if (!map.current) {
             map.current = L.map(mapContainer.current, { preferCanvas: true }).setView([20, 0], 2);
             L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png').addTo(map.current);
+            
             fetch('https://raw.githubusercontent.com/telegeography/www.submarinecablemap.com/master/web/public/api/v3/cable/cable-geo.json')
-                .then(r => r.json()).then(d => L.geoJSON(d, { style: { color: "#00ffff", weight: 1, opacity: 0.15 } }).addTo(map.current));
+                .then(r => r.json()).then(d => {
+                    L.geoJSON(d, { style: { color: "#00ffff", weight: 1, opacity: 0.15 }, interactive: false }).addTo(map.current);
+                }).catch(e => console.error("Cable Load Error:", e));
         }
     }, [loading]);
 
@@ -60,7 +72,11 @@ export default function Dashboard() {
         if (!map.current || typeof window === 'undefined') return;
         const L = require('leaflet');
         map.current.eachLayer((l: any) => { if (l instanceof L.CircleMarker) map.current.removeLayer(l); });
+        
         filteredFacilities.forEach(f => {
+            // Triple-check coordinates before drawing to prevent crashes
+            if (!f.Coordinates?.Lat || !f.Coordinates?.Lon) return;
+
             const popup = `
                 <div style="background:#111; color:#eee; font-family:monospace; min-width:200px;">
                     <b style="color:#00ff00;">${f.Operator}</b><br/><small>${f.FacilityName}</small>
