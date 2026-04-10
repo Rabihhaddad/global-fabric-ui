@@ -155,7 +155,8 @@ export default function GlobalFabricMap() {
         initialViewState={{ longitude: 17.5, latitude: 1.5, zoom: 2.5 }}
         mapStyle="mapbox://styles/mapbox/dark-v11"
         mapboxAccessToken={MAPBOX_TOKEN}
-        projection="globe"
+        projection={{ name: 'globe' }} // <-- Changed to Object syntax
+        fog={{}} // <-- Added this to force the space atmosphere
         onClick={onMapClick}
         interactiveLayerIds={interactiveLayerIds}
         cursor={selectedNode ? 'pointer' : 'crosshair'}
