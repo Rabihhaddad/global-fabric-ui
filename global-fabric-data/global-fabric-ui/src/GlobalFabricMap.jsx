@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import Map, { Source, Layer, Popup } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN;
+const MAPBOX_TOKEN = 'pk.eyJ1Ijoicm9iaDg2IiwiYSI6ImNtbnQxdXJheTA1MzQycm9ocnJ3MTNxdTQifQ.IwpGLWW85VH4r9N6DHiy4w';
 
 // --- STYLES ---
 const cableLayerStyle = { id: 'cables-layer', type: 'line', paint: { 'line-color': '#00aaff', 'line-width': 2, 'line-opacity': 0.6 }};
