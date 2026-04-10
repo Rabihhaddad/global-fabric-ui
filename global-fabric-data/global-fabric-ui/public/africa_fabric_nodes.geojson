@@ -1,0 +1,2489 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          18.420575,
+          -33.918595
+        ]
+      },
+      "properties": {
+        "name": "NTT Data (MEA) - Cape Town",
+        "source": "PeeringDB",
+        "isps": "NTT, Telia",
+        "ixs": "MegaIX, Equinix IX",
+        "cloud_providers": "AWS Direct Connect, Azure ExpressRoute",
+        "address": "Unit 695, NTT Data (MEA) - Cape Town Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.25435,
+          30.091435
+        ]
+      },
+      "properties": {
+        "name": "CityNet Host",
+        "source": "PeeringDB",
+        "isps": "Telia",
+        "ixs": "MegaIX",
+        "cloud_providers": "Google Cloud Interconnect, Azure ExpressRoute",
+        "address": "Unit 834, CityNet Host Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          28.197517,
+          -26.137957
+        ]
+      },
+      "properties": {
+        "name": "Teraco Johannesburg Campus, South Africa",
+        "source": "PeeringDB",
+        "isps": "Tata Communications, Hurricane Electric, Zayo",
+        "ixs": "Equinix IX",
+        "cloud_providers": "AWS Direct Connect, Azure ExpressRoute",
+        "address": "Unit 229, Teraco Johannesburg Campus, South Africa Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.417531,
+          6.426645
+        ]
+      },
+      "properties": {
+        "name": "Digital Realty Lagos (LOS1-2)",
+        "source": "PeeringDB",
+        "isps": "Zayo, NTT",
+        "ixs": "LINX",
+        "cloud_providers": "AWS Direct Connect, IBM Cloud Direct Link",
+        "address": "Unit 718, Digital Realty Lagos (LOS1-2) Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          18.465223,
+          -33.970872
+        ]
+      },
+      "properties": {
+        "name": "Teraco CT1 Cape Town, South Africa",
+        "source": "PeeringDB",
+        "isps": "Lumen, Orange",
+        "ixs": "Equinix IX, Any2Exchange",
+        "cloud_providers": "Google Cloud Interconnect",
+        "address": "Unit 708, Teraco CT1 Cape Town, South Africa Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          13.181343,
+          -8.914886
+        ]
+      },
+      "properties": {
+        "name": "AngoNAP Luanda",
+        "source": "PeeringDB",
+        "isps": "Orange, Cogent Communications",
+        "ixs": "AMS-IX, Any2Exchange, DE-CIX",
+        "cloud_providers": "Oracle FastConnect",
+        "address": "Unit 943, AngoNAP Luanda Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.990127,
+          -29.783372
+        ]
+      },
+      "properties": {
+        "name": "Teraco DB1 Durban, South Africa",
+        "source": "PeeringDB",
+        "isps": "Telia, Cogent Communications",
+        "ixs": "JINX, Equinix IX",
+        "cloud_providers": "Google Cloud Interconnect",
+        "address": "Unit 365, Teraco DB1 Durban, South Africa Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          28.12549,
+          -25.997406
+        ]
+      },
+      "properties": {
+        "name": "Bunker One",
+        "source": "PeeringDB",
+        "isps": "Cogent Communications, Telia, Tata Communications",
+        "ixs": "JINX",
+        "cloud_providers": "AWS Direct Connect",
+        "address": "Unit 996, Bunker One Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.246959,
+          30.145975
+        ]
+      },
+      "properties": {
+        "name": "Ramses Exchange",
+        "source": "PeeringDB",
+        "isps": "Lumen, Tata Communications, Singtel, Telia",
+        "ixs": "AMS-IX, Equinix IX, DE-CIX",
+        "cloud_providers": "AWS Direct Connect",
+        "address": "Unit 211, Ramses Exchange Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.035891,
+          -15.796113
+        ]
+      },
+      "properties": {
+        "name": "University of Malawi, College of Medicine",
+        "source": "PeeringDB",
+        "isps": "NTT, Orange",
+        "ixs": "LINX",
+        "cloud_providers": "Oracle FastConnect",
+        "address": "Unit 273, University of Malawi, College of Medicine Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.901988,
+          31.192539
+        ]
+      },
+      "properties": {
+        "name": "AUTO DATA Center",
+        "source": "PeeringDB",
+        "isps": "Lumen, NTT, Orange, Singtel",
+        "ixs": "AMS-IX",
+        "cloud_providers": "Oracle FastConnect, Google Cloud Interconnect",
+        "address": "Unit 247, AUTO DATA Center Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.183258,
+          36.821174
+        ]
+      },
+      "properties": {
+        "name": "ATLAX",
+        "source": "PeeringDB",
+        "isps": "NTT, Hurricane Electric, Cogent Communications",
+        "ixs": "LINX, AMS-IX, Equinix IX",
+        "cloud_providers": "Oracle FastConnect, Azure ExpressRoute",
+        "address": "Unit 197, ATLAX Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.896534,
+          -1.34014
+        ]
+      },
+      "properties": {
+        "name": "Africa Data Centres, Nairobi NBO1, Kenya",
+        "source": "PeeringDB",
+        "isps": "Orange, Cogent Communications",
+        "ixs": "AMS-IX, JINX, Equinix IX",
+        "cloud_providers": "Azure ExpressRoute, Oracle FastConnect",
+        "address": "Unit 249, Africa Data Centres, Nairobi NBO1, Kenya Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.094369,
+          5.802659
+        ]
+      },
+      "properties": {
+        "name": "Equinix AC1 - Accra",
+        "source": "PeeringDB",
+        "isps": "Telia",
+        "ixs": "DE-CIX, AMS-IX",
+        "cloud_providers": "IBM Cloud Direct Link",
+        "address": "Unit 414, Equinix AC1 - Accra Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.758384,
+          -28.960238
+        ]
+      },
+      "properties": {
+        "name": "SEACOM Mtunzini CLS",
+        "source": "PeeringDB",
+        "isps": "Tata Communications",
+        "ixs": "LINX",
+        "cloud_providers": "Azure ExpressRoute, AWS Direct Connect",
+        "address": "Unit 167, SEACOM Mtunzini CLS Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.046017,
+          -17.827053
+        ]
+      },
+      "properties": {
+        "name": "Utande Internet Services",
+        "source": "PeeringDB",
+        "isps": "Orange, Tata Communications",
+        "ixs": "LINX, AMS-IX",
+        "cloud_providers": "Google Cloud Interconnect, Azure ExpressRoute",
+        "address": "Unit 943, Utande Internet Services Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          28.140755,
+          -25.927622
+        ]
+      },
+      "properties": {
+        "name": "xneelo JNB1 (Formerly Hetzner SA)",
+        "source": "PeeringDB",
+        "isps": "Orange, Telia, Singtel",
+        "ixs": "MegaIX, Any2Exchange",
+        "cloud_providers": "Oracle FastConnect",
+        "address": "Unit 280, xneelo JNB1 (Formerly Hetzner SA) Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          32.589456,
+          -25.943534
+        ]
+      },
+      "properties": {
+        "name": "Webmasters Maputo",
+        "source": "PeeringDB",
+        "isps": "Lumen, Cogent Communications, Telia, Orange",
+        "ixs": "Equinix IX, AMS-IX, LINX",
+        "cloud_providers": "Oracle FastConnect",
+        "address": "Unit 753, Webmasters Maputo Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -4.999688,
+          34.037123
+        ]
+      },
+      "properties": {
+        "name": "HOSTOWEB DATA CENTER FEZ#1",
+        "source": "PeeringDB",
+        "isps": "NTT, Cogent Communications, Zayo, Singtel",
+        "ixs": "MegaIX",
+        "cloud_providers": "Azure ExpressRoute",
+        "address": "Unit 943, HOSTOWEB DATA CENTER FEZ#1 Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          47.508453,
+          -18.880804
+        ]
+      },
+      "properties": {
+        "name": "B\u00e2timent Sirius",
+        "source": "PeeringDB",
+        "isps": "Orange, Zayo, NTT",
+        "ixs": "Equinix IX, MegaIX, DE-CIX",
+        "cloud_providers": "IBM Cloud Direct Link",
+        "address": "Unit 247, B\u00e2timent Sirius Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.495076,
+          9.093154
+        ]
+      },
+      "properties": {
+        "name": "Phase3Telecom",
+        "source": "PeeringDB",
+        "isps": "Cogent Communications",
+        "ixs": "Equinix IX, JINX, DE-CIX",
+        "cloud_providers": "Google Cloud Interconnect",
+        "address": "Unit 978, Phase3Telecom Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.511823,
+          12.37367
+        ]
+      },
+      "properties": {
+        "name": "Datacenter Immeuble du Faso",
+        "source": "PeeringDB",
+        "isps": "NTT",
+        "ixs": "AMS-IX",
+        "cloud_providers": "IBM Cloud Direct Link",
+        "address": "Unit 947, Datacenter Immeuble du Faso Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          15.272854,
+          -4.275768
+        ]
+      },
+      "properties": {
+        "name": "Si\u00e8ge de l'ARPCE",
+        "source": "PeeringDB",
+        "isps": "Telia, NTT, Lumen",
+        "ixs": "LINX",
+        "cloud_providers": "IBM Cloud Direct Link, Oracle FastConnect",
+        "address": "Unit 190, Si\u00e8ge de l'ARPCE Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          18.972623,
+          -33.839236
+        ]
+      },
+      "properties": {
+        "name": "Beonline 24/7",
+        "source": "PeeringDB",
+        "isps": "Orange, Singtel",
+        "ixs": "AMS-IX",
+        "cloud_providers": "AWS Direct Connect",
+        "address": "Unit 210, Beonline 24/7 Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.200955,
+          36.844214
+        ]
+      },
+      "properties": {
+        "name": "Orange Tunisie",
+        "source": "PeeringDB",
+        "isps": "Telia, Singtel",
+        "ixs": "Any2Exchange",
+        "cloud_providers": "AWS Direct Connect, IBM Cloud Direct Link",
+        "address": "Unit 915, Orange Tunisie Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.067675,
+          -29.726143
+        ]
+      },
+      "properties": {
+        "name": "NTT DATA, Umhlanga",
+        "source": "PeeringDB",
+        "isps": "Hurricane Electric, Zayo, Telia, Orange",
+        "ixs": "AMS-IX",
+        "cloud_providers": "Google Cloud Interconnect",
+        "address": "Unit 115, NTT DATA, Umhlanga Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.202902,
+          5.572623
+        ]
+      },
+      "properties": {
+        "name": "PAIX Accra",
+        "source": "PeeringDB",
+        "isps": "Hurricane Electric, Tata Communications, NTT, Singtel",
+        "ixs": "Equinix IX, JINX, LINX",
+        "cloud_providers": "Google Cloud Interconnect, Azure ExpressRoute",
+        "address": "Unit 983, PAIX Accra Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.91304,
+          31.192996
+        ]
+      },
+      "properties": {
+        "name": "GPX Cairo 1",
+        "source": "PeeringDB",
+        "isps": "Hurricane Electric, Singtel",
+        "ixs": "MegaIX, JINX",
+        "cloud_providers": "IBM Cloud Direct Link, Google Cloud Interconnect",
+        "address": "Unit 513, GPX Cairo 1 Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          32.584331,
+          0.313513
+        ]
+      },
+      "properties": {
+        "name": "Communications House",
+        "source": "PeeringDB",
+        "isps": "Zayo, Cogent Communications",
+        "ixs": "Any2Exchange",
+        "cloud_providers": "IBM Cloud Direct Link, Azure ExpressRoute",
+        "address": "Unit 957, Communications House Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.19187,
+          5.599364
+        ]
+      },
+      "properties": {
+        "name": "K-Net Accra",
+        "source": "PeeringDB",
+        "isps": "Lumen, Orange",
+        "ixs": "LINX, MegaIX, Any2Exchange",
+        "cloud_providers": "Azure ExpressRoute",
+        "address": "Unit 175, K-Net Accra Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.199769,
+          5.552237
+        ]
+      },
+      "properties": {
+        "name": "IS Internet Solutions Ghana",
+        "source": "PeeringDB",
+        "isps": "NTT, Lumen, Singtel, Orange",
+        "ixs": "Equinix IX, Any2Exchange",
+        "cloud_providers": "Google Cloud Interconnect",
+        "address": "Unit 576, IS Internet Solutions Ghana Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          15.289287,
+          -4.323755
+        ]
+      },
+      "properties": {
+        "name": "GBS Datacenter",
+        "source": "PeeringDB",
+        "isps": "Orange, Zayo, NTT",
+        "ixs": "Equinix IX, JINX",
+        "cloud_providers": "IBM Cloud Direct Link, Google Cloud Interconnect",
+        "address": "Unit 333, GBS Datacenter Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.397881,
+          6.447573
+        ]
+      },
+      "properties": {
+        "name": "NCR-Marina",
+        "source": "PeeringDB",
+        "isps": "Telia, Hurricane Electric, Cogent Communications, Singtel",
+        "ixs": "JINX",
+        "cloud_providers": "AWS Direct Connect, IBM Cloud Direct Link",
+        "address": "Unit 717, NCR-Marina Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.373062,
+          6.597527
+        ]
+      },
+      "properties": {
+        "name": "Rack Centre Lagos",
+        "source": "PeeringDB",
+        "isps": "Lumen, NTT",
+        "ixs": "Any2Exchange, DE-CIX",
+        "cloud_providers": "AWS Direct Connect",
+        "address": "Unit 217, Rack Centre Lagos Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          39.288795,
+          -6.813258
+        ]
+      },
+      "properties": {
+        "name": "TIX - Tanzania - Posta House",
+        "source": "PeeringDB",
+        "isps": "NTT",
+        "ixs": "AMS-IX, JINX",
+        "cloud_providers": "Google Cloud Interconnect, Oracle FastConnect",
+        "address": "Unit 925, TIX - Tanzania - Posta House Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          28.036968,
+          -26.146144
+        ]
+      },
+      "properties": {
+        "name": "NTT Data (MEA) - Parklands",
+        "source": "PeeringDB",
+        "isps": "Singtel, Cogent Communications, Telia, Tata Communications",
+        "ixs": "Equinix IX",
+        "cloud_providers": "Oracle FastConnect",
+        "address": "Unit 336, NTT Data (MEA) - Parklands Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.849609,
+          -1.325805
+        ]
+      },
+      "properties": {
+        "name": "SimbaNET Nairobi",
+        "source": "PeeringDB",
+        "isps": "Singtel",
+        "ixs": "DE-CIX",
+        "cloud_providers": "AWS Direct Connect",
+        "address": "Unit 290, SimbaNET Nairobi Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -13.652079,
+          9.606391
+        ]
+      },
+      "properties": {
+        "name": "GUILAB Datacenter",
+        "source": "PeeringDB",
+        "isps": "Singtel, Telia, NTT, Hurricane Electric",
+        "ixs": "LINX, MegaIX, Any2Exchange",
+        "cloud_providers": "AWS Direct Connect",
+        "address": "Unit 507, GUILAB Datacenter Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          13.175889,
+          -8.914417
+        ]
+      },
+      "properties": {
+        "name": "UNITEL-AO-LAD-DC-LUANDASUL",
+        "source": "PeeringDB",
+        "isps": "Singtel, NTT, Orange",
+        "ixs": "AMS-IX, Equinix IX, Any2Exchange",
+        "cloud_providers": "AWS Direct Connect, Oracle FastConnect",
+        "address": "Unit 771, UNITEL-AO-LAD-DC-LUANDASUL Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          13.294281,
+          -8.852825
+        ]
+      },
+      "properties": {
+        "name": "UNITEL-AO-LAD-DC-FILDA",
+        "source": "PeeringDB",
+        "isps": "Zayo",
+        "ixs": "Any2Exchange, DE-CIX, LINX",
+        "cloud_providers": "IBM Cloud Direct Link, AWS Direct Connect",
+        "address": "Unit 526, UNITEL-AO-LAD-DC-FILDA Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          39.590389,
+          -4.007737
+        ]
+      },
+      "properties": {
+        "name": "icolo.io Mombasa One (MBA1)",
+        "source": "PeeringDB",
+        "isps": "Lumen",
+        "ixs": "Any2Exchange, LINX",
+        "cloud_providers": "AWS Direct Connect, Google Cloud Interconnect",
+        "address": "Unit 742, icolo.io Mombasa One (MBA1) Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.588328,
+          6.449602
+        ]
+      },
+      "properties": {
+        "name": "Equinix LG1/LG2 \u2013 Lagos, Lekki",
+        "source": "PeeringDB",
+        "isps": "Zayo, Singtel, NTT, Cogent Communications",
+        "ixs": "JINX, DE-CIX, MegaIX",
+        "cloud_providers": "Oracle FastConnect, Azure ExpressRoute",
+        "address": "Unit 718, Equinix LG1/LG2 \u2013 Lagos, Lekki Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.393191,
+          0.522265
+        ]
+      },
+      "properties": {
+        "name": "GABIX POP ACE",
+        "source": "PeeringDB",
+        "isps": "Telia, Singtel, Cogent Communications, Lumen",
+        "ixs": "LINX, JINX, AMS-IX",
+        "cloud_providers": "IBM Cloud Direct Link",
+        "address": "Unit 970, GABIX POP ACE Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.467299,
+          0.416185
+        ]
+      },
+      "properties": {
+        "name": "GABIX POP CT-1",
+        "source": "PeeringDB",
+        "isps": "Hurricane Electric, Tata Communications, Lumen, Telia",
+        "ixs": "DE-CIX, LINX",
+        "cloud_providers": "Google Cloud Interconnect, AWS Direct Connect",
+        "address": "Unit 970, GABIX POP CT-1 Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          57.506937,
+          -20.164743
+        ]
+      },
+      "properties": {
+        "name": "Data Communications Port Louis",
+        "source": "PeeringDB",
+        "isps": "Cogent Communications",
+        "ixs": "Equinix IX, JINX, LINX",
+        "cloud_providers": "Azure ExpressRoute",
+        "address": "Unit 846, Data Communications Port Louis Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          32.569365,
+          15.580568
+        ]
+      },
+      "properties": {
+        "name": "Canartel",
+        "source": "PeeringDB",
+        "isps": "Tata Communications, Lumen",
+        "ixs": "JINX, MegaIX",
+        "cloud_providers": "Azure ExpressRoute, AWS Direct Connect",
+        "address": "Unit 324, Canartel Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          18.477196,
+          -34.037364
+        ]
+      },
+      "properties": {
+        "name": "Africa Data Centres, Cape Town CPT1, South Africa",
+        "source": "PeeringDB",
+        "isps": "Singtel, Tata Communications, Hurricane Electric, Lumen",
+        "ixs": "AMS-IX, Equinix IX, Any2Exchange",
+        "cloud_providers": "Google Cloud Interconnect",
+        "address": "Unit 829, Africa Data Centres, Cape Town CPT1, South Africa Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          28.118946,
+          -26.010556
+        ]
+      },
+      "properties": {
+        "name": "Africa Data Centres, Johannesburg JHB1, South Africa",
+        "source": "PeeringDB",
+        "isps": "Orange, Tata Communications",
+        "ixs": "AMS-IX",
+        "cloud_providers": "IBM Cloud Direct Link",
+        "address": "Unit 508, Africa Data Centres, Johannesburg JHB1, South Africa Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.860171,
+          -4.774753
+        ]
+      },
+      "properties": {
+        "name": "Congo Telecom Carrier Facility PNR1",
+        "source": "PeeringDB",
+        "isps": "Lumen, Hurricane Electric, Zayo, Singtel",
+        "ixs": "Any2Exchange, AMS-IX, DE-CIX",
+        "cloud_providers": "Azure ExpressRoute, IBM Cloud Direct Link",
+        "address": "Unit 885, Congo Telecom Carrier Facility PNR1 Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.397686,
+          6.446055
+        ]
+      },
+      "properties": {
+        "name": "Broadbased Communications",
+        "source": "PeeringDB",
+        "isps": "Telia, Cogent Communications",
+        "ixs": "AMS-IX",
+        "cloud_providers": "Azure ExpressRoute, IBM Cloud Direct Link",
+        "address": "Unit 198, Broadbased Communications Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.973288,
+          5.355848
+        ]
+      },
+      "properties": {
+        "name": "PAIX Abidjan",
+        "source": "PeeringDB",
+        "isps": "Tata Communications",
+        "ixs": "JINX, Equinix IX, AMS-IX",
+        "cloud_providers": "AWS Direct Connect, Google Cloud Interconnect",
+        "address": "Unit 501, PAIX Abidjan Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.749228,
+          -1.35008
+        ]
+      },
+      "properties": {
+        "name": "icolo.io Nairobi One (NBO1)",
+        "source": "PeeringDB",
+        "isps": "Cogent Communications",
+        "ixs": "Equinix IX, Any2Exchange",
+        "cloud_providers": "AWS Direct Connect, IBM Cloud Direct Link",
+        "address": "Unit 854, icolo.io Nairobi One (NBO1) Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          28.278459,
+          -26.074142
+        ]
+      },
+      "properties": {
+        "name": "Teraco Johannesburg Bredell Campus",
+        "source": "PeeringDB",
+        "isps": "Orange",
+        "ixs": "MegaIX, DE-CIX, Any2Exchange",
+        "cloud_providers": "AWS Direct Connect",
+        "address": "Unit 814, Teraco Johannesburg Bredell Campus Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.80529,
+          -1.290173
+        ]
+      },
+      "properties": {
+        "name": "Telkom - Milimani Data Center - Nairobi",
+        "source": "PeeringDB",
+        "isps": "Singtel",
+        "ixs": "LINX, Any2Exchange",
+        "cloud_providers": "IBM Cloud Direct Link",
+        "address": "Unit 954, Telkom - Milimani Data Center - Nairobi Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          39.657172,
+          -4.060807
+        ]
+      },
+      "properties": {
+        "name": "Telkom - Telephone House - Mombasa",
+        "source": "PeeringDB",
+        "isps": "Zayo, Hurricane Electric, NTT",
+        "ixs": "AMS-IX",
+        "cloud_providers": "Oracle FastConnect",
+        "address": "Unit 730, Telkom - Telephone House - Mombasa Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.817712,
+          -1.280859
+        ]
+      },
+      "properties": {
+        "name": "Telkom - Telephone House - Nairobi",
+        "source": "PeeringDB",
+        "isps": "Singtel",
+        "ixs": "Any2Exchange, Equinix IX",
+        "cloud_providers": "Azure ExpressRoute, IBM Cloud Direct Link",
+        "address": "Unit 982, Telkom - Telephone House - Nairobi Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          57.49181,
+          -20.245227
+        ]
+      },
+      "properties": {
+        "name": "Government Online Centre",
+        "source": "PeeringDB",
+        "isps": "Singtel",
+        "ixs": "DE-CIX",
+        "cloud_providers": "Google Cloud Interconnect, Oracle FastConnect",
+        "address": "Unit 417, Government Online Centre Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.421101,
+          6.427276
+        ]
+      },
+      "properties": {
+        "name": "Swift Networks Lagos",
+        "source": "PeeringDB",
+        "isps": "Singtel, Hurricane Electric, Tata Communications, Zayo",
+        "ixs": "AMS-IX, Equinix IX",
+        "cloud_providers": "Azure ExpressRoute, Oracle FastConnect",
+        "address": "Unit 185, Swift Networks Lagos Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.499937,
+          12.304813
+        ]
+      },
+      "properties": {
+        "name": "Datacenter Ministere de l'agriculture",
+        "source": "PeeringDB",
+        "isps": "Cogent Communications, Lumen, NTT, Tata Communications",
+        "ixs": "JINX, LINX, Any2Exchange",
+        "cloud_providers": "Google Cloud Interconnect",
+        "address": "Unit 117, Datacenter Ministere de l'agriculture Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          32.580951,
+          -25.97019
+        ]
+      },
+      "properties": {
+        "name": "Teledata Mozambique",
+        "source": "PeeringDB",
+        "isps": "Orange",
+        "ixs": "AMS-IX",
+        "cloud_providers": "IBM Cloud Direct Link",
+        "address": "Unit 102, Teledata Mozambique Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          32.593882,
+          -25.97706
+        ]
+      },
+      "properties": {
+        "name": "Internet Solutions DC Maputo",
+        "source": "PeeringDB",
+        "isps": "Cogent Communications, NTT, Telia, Zayo",
+        "ixs": "Any2Exchange, MegaIX",
+        "cloud_providers": "Google Cloud Interconnect",
+        "address": "Unit 211, Internet Solutions DC Maputo Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.813223,
+          -1.299937
+        ]
+      },
+      "properties": {
+        "name": "PAIX Nairobi",
+        "source": "PeeringDB",
+        "isps": "Zayo, Telia, Singtel",
+        "ixs": "AMS-IX, Equinix IX",
+        "cloud_providers": "IBM Cloud Direct Link, Oracle FastConnect",
+        "address": "Unit 585, PAIX Nairobi Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          13.197341,
+          -8.958489
+        ]
+      },
+      "properties": {
+        "name": "Paratus ITA-DC1",
+        "source": "PeeringDB",
+        "isps": "Hurricane Electric, Singtel, NTT",
+        "ixs": "Equinix IX, Any2Exchange, MegaIX",
+        "cloud_providers": "IBM Cloud Direct Link, Oracle FastConnect",
+        "address": "Unit 713, Paratus ITA-DC1 Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.397458,
+          6.446072
+        ]
+      },
+      "properties": {
+        "name": "Interconnect Nigeria",
+        "source": "PeeringDB",
+        "isps": "NTT, Lumen",
+        "ixs": "DE-CIX",
+        "cloud_providers": "Google Cloud Interconnect",
+        "address": "Unit 530, Interconnect Nigeria Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.371944,
+          -3.38034
+        ]
+      },
+      "properties": {
+        "name": "Smart Burundi",
+        "source": "PeeringDB",
+        "isps": "Zayo",
+        "ixs": "Equinix IX, JINX, DE-CIX",
+        "cloud_providers": "Oracle FastConnect, Google Cloud Interconnect",
+        "address": "Unit 477, Smart Burundi Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.479824,
+          9.069591
+        ]
+      },
+      "properties": {
+        "name": "Medallion Abuja",
+        "source": "PeeringDB",
+        "isps": "Tata Communications, Singtel, NTT",
+        "ixs": "Any2Exchange, MegaIX, Equinix IX",
+        "cloud_providers": "Oracle FastConnect, Azure ExpressRoute",
+        "address": "Unit 183, Medallion Abuja Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          15.278608,
+          -4.316695
+        ]
+      },
+      "properties": {
+        "name": "United Kinshasa",
+        "source": "PeeringDB",
+        "isps": "Orange",
+        "ixs": "DE-CIX",
+        "cloud_providers": "Azure ExpressRoute",
+        "address": "Unit 595, United Kinshasa Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.020704,
+          30.067903
+        ]
+      },
+      "properties": {
+        "name": "Smart Village Data Center (B90)",
+        "source": "PeeringDB",
+        "isps": "Zayo, Orange, Cogent Communications",
+        "ixs": "Any2Exchange, MegaIX",
+        "cloud_providers": "AWS Direct Connect, Azure ExpressRoute",
+        "address": "Unit 192, Smart Village Data Center (B90) Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.908249,
+          3.751458
+        ]
+      },
+      "properties": {
+        "name": "SIPOPO DATACENTER",
+        "source": "PeeringDB",
+        "isps": "Orange, Zayo, Singtel, Lumen",
+        "ixs": "JINX",
+        "cloud_providers": "Google Cloud Interconnect",
+        "address": "Unit 727, SIPOPO DATACENTER Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.696225,
+          4.056759
+        ]
+      },
+      "properties": {
+        "name": "Datacenter Services Douala",
+        "source": "PeeringDB",
+        "isps": "Tata Communications, Telia",
+        "ixs": "JINX, Equinix IX, Any2Exchange",
+        "cloud_providers": "AWS Direct Connect",
+        "address": "Unit 752, Datacenter Services Douala Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          28.138418,
+          -25.930536
+        ]
+      },
+      "properties": {
+        "name": "Africa Data Centres, Johannesburg JHB2, South Africa",
+        "source": "PeeringDB",
+        "isps": "Zayo, Singtel, Telia, Orange",
+        "ixs": "Any2Exchange",
+        "cloud_providers": "AWS Direct Connect",
+        "address": "Unit 604, Africa Data Centres, Johannesburg JHB2, South Africa Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.005946,
+          4.80593
+        ]
+      },
+      "properties": {
+        "name": "interconnectnigeria Data Centre",
+        "source": "PeeringDB",
+        "isps": "Singtel, Hurricane Electric, Telia",
+        "ixs": "LINX",
+        "cloud_providers": "IBM Cloud Direct Link, Oracle FastConnect",
+        "address": "Unit 754, interconnectnigeria Data Centre Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          39.201724,
+          -6.703944
+        ]
+      },
+      "properties": {
+        "name": "STELLAR IX SALASALA DataCenter",
+        "source": "PeeringDB",
+        "isps": "Telia, NTT, Cogent Communications, Lumen",
+        "ixs": "DE-CIX, LINX, Equinix IX",
+        "cloud_providers": "Google Cloud Interconnect",
+        "address": "Unit 121, STELLAR IX SALASALA DataCenter Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          39.700135,
+          -4.042095
+        ]
+      },
+      "properties": {
+        "name": "icolo.io Mombasa Two (MBA2)",
+        "source": "PeeringDB",
+        "isps": "Telia, Singtel, Zayo",
+        "ixs": "MegaIX, LINX",
+        "cloud_providers": "Google Cloud Interconnect, Azure ExpressRoute",
+        "address": "Unit 550, icolo.io Mombasa Two (MBA2) Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          32.582681,
+          -25.961395
+        ]
+      },
+      "properties": {
+        "name": "icolo.io Maputo One (MPM1)",
+        "source": "PeeringDB",
+        "isps": "Lumen",
+        "ixs": "MegaIX, DE-CIX, AMS-IX",
+        "cloud_providers": "Oracle FastConnect",
+        "address": "Unit 447, icolo.io Maputo One (MPM1) Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          28.163056,
+          -25.91459
+        ]
+      },
+      "properties": {
+        "name": "Digital Parks - Samrand",
+        "source": "PeeringDB",
+        "isps": "Cogent Communications",
+        "ixs": "Equinix IX",
+        "cloud_providers": "IBM Cloud Direct Link, Azure ExpressRoute",
+        "address": "Unit 336, Digital Parks - Samrand Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          39.206499,
+          -6.862934
+        ]
+      },
+      "properties": {
+        "name": "Datalabs Dar es Salaam",
+        "source": "PeeringDB",
+        "isps": "Cogent Communications, Lumen",
+        "ixs": "Equinix IX, Any2Exchange, AMS-IX",
+        "cloud_providers": "IBM Cloud Direct Link",
+        "address": "Unit 528, Datalabs Dar es Salaam Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.196388,
+          5.60706
+        ]
+      },
+      "properties": {
+        "name": "ONIX Data Centre Accra",
+        "source": "PeeringDB",
+        "isps": "Telia, Lumen, NTT, Singtel",
+        "ixs": "Equinix IX, MegaIX",
+        "cloud_providers": "AWS Direct Connect, Google Cloud Interconnect",
+        "address": "Unit 473, ONIX Data Centre Accra Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.726006,
+          4.059685
+        ]
+      },
+      "properties": {
+        "name": "Camtel Bepanda",
+        "source": "PeeringDB",
+        "isps": "Tata Communications, Lumen, Zayo, Cogent Communications",
+        "ixs": "JINX, AMS-IX",
+        "cloud_providers": "Oracle FastConnect, Google Cloud Interconnect",
+        "address": "Unit 348, Camtel Bepanda Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.512948,
+          3.86758
+        ]
+      },
+      "properties": {
+        "name": "CAMPOST Data Center Yaound\u00e9",
+        "source": "PeeringDB",
+        "isps": "Cogent Communications, NTT, Zayo, Telia",
+        "ixs": "AMS-IX, MegaIX, Equinix IX",
+        "cloud_providers": "IBM Cloud Direct Link",
+        "address": "Unit 944, CAMPOST Data Center Yaound\u00e9 Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.397552,
+          6.44645
+        ]
+      },
+      "properties": {
+        "name": "Ninext Data Center",
+        "source": "PeeringDB",
+        "isps": "Zayo",
+        "ixs": "MegaIX",
+        "cloud_providers": "IBM Cloud Direct Link",
+        "address": "Unit 782, Ninext Data Center Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.457222,
+          3.881339
+        ]
+      },
+      "properties": {
+        "name": "Camtel Datacenter Zamengoe-Yaounde",
+        "source": "PeeringDB",
+        "isps": "Zayo, Tata Communications",
+        "ixs": "JINX",
+        "cloud_providers": "Google Cloud Interconnect, IBM Cloud Direct Link",
+        "address": "Unit 567, Camtel Datacenter Zamengoe-Yaounde Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          28.035499,
+          -26.134061
+        ]
+      },
+      "properties": {
+        "name": "Reflex Solutions",
+        "source": "PeeringDB",
+        "isps": "Singtel",
+        "ixs": "MegaIX, Equinix IX, LINX",
+        "cloud_providers": "IBM Cloud Direct Link, Google Cloud Interconnect",
+        "address": "Unit 507, Reflex Solutions Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.792083,
+          33.986888
+        ]
+      },
+      "properties": {
+        "name": "INWI Data Center",
+        "source": "PeeringDB",
+        "isps": "Singtel",
+        "ixs": "AMS-IX, DE-CIX",
+        "cloud_providers": "Google Cloud Interconnect, IBM Cloud Direct Link",
+        "address": "Unit 374, INWI Data Center Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          28.140551,
+          -25.920656
+        ]
+      },
+      "properties": {
+        "name": "NTT Johannesburg 1 Data Center (JOH1)",
+        "source": "PeeringDB",
+        "isps": "NTT",
+        "ixs": "MegaIX, Equinix IX",
+        "cloud_providers": "Oracle FastConnect, Google Cloud Interconnect",
+        "address": "Unit 753, NTT Johannesburg 1 Data Center (JOH1) Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.430645,
+          6.455857
+        ]
+      },
+      "properties": {
+        "name": "Cloud Exchange West Africa",
+        "source": "PeeringDB",
+        "isps": "Lumen, Zayo",
+        "ixs": "DE-CIX, AMS-IX",
+        "cloud_providers": "Oracle FastConnect, Azure ExpressRoute",
+        "address": "Unit 417, Cloud Exchange West Africa Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.031873,
+          12.597659
+        ]
+      },
+      "properties": {
+        "name": "Afribone DC Bamako MALI",
+        "source": "PeeringDB",
+        "isps": "Lumen, Tata Communications, Cogent Communications, Singtel",
+        "ixs": "Any2Exchange, LINX",
+        "cloud_providers": "Google Cloud Interconnect, IBM Cloud Direct Link",
+        "address": "Unit 518, Afribone DC Bamako MALI Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.498477,
+          12.315818
+        ]
+      },
+      "properties": {
+        "name": "Virtix Data Center",
+        "source": "PeeringDB",
+        "isps": "Lumen",
+        "ixs": "DE-CIX",
+        "cloud_providers": "IBM Cloud Direct Link, AWS Direct Connect",
+        "address": "Unit 158, Virtix Data Center Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          32.694135,
+          0.358071
+        ]
+      },
+      "properties": {
+        "name": "Raxio Kampala UG1",
+        "source": "PeeringDB",
+        "isps": "Hurricane Electric, Singtel, Zayo",
+        "ixs": "JINX, Equinix IX",
+        "cloud_providers": "Azure ExpressRoute",
+        "address": "Unit 203, Raxio Kampala UG1 Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.415752,
+          6.410497
+        ]
+      },
+      "properties": {
+        "name": "Africa Data Centres, Lagos LOS1, Nigeria",
+        "source": "PeeringDB",
+        "isps": "NTT, Zayo, Singtel, Orange",
+        "ixs": "MegaIX, AMS-IX, Any2Exchange",
+        "cloud_providers": "AWS Direct Connect, Azure ExpressRoute",
+        "address": "Unit 962, Africa Data Centres, Lagos LOS1, Nigeria Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          32.519703,
+          15.583466
+        ]
+      },
+      "properties": {
+        "name": "Sudatel DC Khartoum",
+        "source": "PeeringDB",
+        "isps": "Zayo, Hurricane Electric",
+        "ixs": "MegaIX, AMS-IX, JINX",
+        "cloud_providers": "Azure ExpressRoute, AWS Direct Connect",
+        "address": "Unit 112, Sudatel DC Khartoum Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.204261,
+          19.650786
+        ]
+      },
+      "properties": {
+        "name": "Sudatel DC SAS1 Port Sudan",
+        "source": "PeeringDB",
+        "isps": "NTT, Lumen, Telia, Cogent Communications",
+        "ixs": "JINX, AMS-IX",
+        "cloud_providers": "Google Cloud Interconnect",
+        "address": "Unit 783, Sudatel DC SAS1 Port Sudan Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.10344,
+          -1.940686
+        ]
+      },
+      "properties": {
+        "name": "MTN Centre Kigali",
+        "source": "PeeringDB",
+        "isps": "Hurricane Electric, NTT, Singtel, Telia",
+        "ixs": "JINX, MegaIX, AMS-IX",
+        "cloud_providers": "Azure ExpressRoute, AWS Direct Connect",
+        "address": "Unit 828, MTN Centre Kigali Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.089676,
+          -1.94445
+        ]
+      },
+      "properties": {
+        "name": "TrAC CDC - B.Secure",
+        "source": "PeeringDB",
+        "isps": "Cogent Communications, Telia, Zayo",
+        "ixs": "DE-CIX, Equinix IX",
+        "cloud_providers": "Azure ExpressRoute",
+        "address": "Unit 263, TrAC CDC - B.Secure Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.757779,
+          5.230347
+        ]
+      },
+      "properties": {
+        "name": "Equinix AB1 - Abidjan",
+        "source": "PeeringDB",
+        "isps": "Orange",
+        "ixs": "AMS-IX, MegaIX",
+        "cloud_providers": "Google Cloud Interconnect",
+        "address": "Unit 304, Equinix AB1 - Abidjan Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          28.293612,
+          -15.407677
+        ]
+      },
+      "properties": {
+        "name": "Paratus Vanguard",
+        "source": "PeeringDB",
+        "isps": "NTT",
+        "ixs": "LINX",
+        "cloud_providers": "Google Cloud Interconnect, Oracle FastConnect",
+        "address": "Unit 595, Paratus Vanguard Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.492709,
+          9.063808
+        ]
+      },
+      "properties": {
+        "name": "Galaxy Backbone NSSC-Abuja",
+        "source": "PeeringDB",
+        "isps": "Cogent Communications, Orange, Zayo",
+        "ixs": "AMS-IX",
+        "cloud_providers": "IBM Cloud Direct Link, Azure ExpressRoute",
+        "address": "Unit 587, Galaxy Backbone NSSC-Abuja Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.779203,
+          8.997753
+        ]
+      },
+      "properties": {
+        "name": "Raxio Addis Ababa ET1",
+        "source": "PeeringDB",
+        "isps": "Cogent Communications, Lumen, Tata Communications",
+        "ixs": "AMS-IX, MegaIX, Any2Exchange",
+        "cloud_providers": "Google Cloud Interconnect",
+        "address": "Unit 985, Raxio Addis Ababa ET1 Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          39.286437,
+          -6.818177
+        ]
+      },
+      "properties": {
+        "name": "TTCL Dar es Salaam Telephone House",
+        "source": "PeeringDB",
+        "isps": "Zayo, Telia, Lumen, Orange",
+        "ixs": "Any2Exchange, MegaIX, LINX",
+        "cloud_providers": "AWS Direct Connect",
+        "address": "Unit 976, TTCL Dar es Salaam Telephone House Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          28.184586,
+          -25.882463
+        ]
+      },
+      "properties": {
+        "name": "ICTGlobe Centurion",
+        "source": "PeeringDB",
+        "isps": "NTT, Lumen, Singtel, Cogent Communications",
+        "ixs": "Equinix IX, JINX",
+        "cloud_providers": "IBM Cloud Direct Link, Azure ExpressRoute",
+        "address": "Unit 609, ICTGlobe Centurion Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          17.068081,
+          -22.414477
+        ]
+      },
+      "properties": {
+        "name": "Paratus Armada",
+        "source": "PeeringDB",
+        "isps": "NTT",
+        "ixs": "DE-CIX",
+        "cloud_providers": "Google Cloud Interconnect, Oracle FastConnect",
+        "address": "Unit 570, Paratus Armada Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          13.181998,
+          -8.901434
+        ]
+      },
+      "properties": {
+        "name": "ELENDE - TECNOLOGIAS DE INFORMACAO",
+        "source": "PeeringDB",
+        "isps": "Lumen, Tata Communications, Hurricane Electric, Zayo",
+        "ixs": "Any2Exchange, Equinix IX",
+        "cloud_providers": "Oracle FastConnect, Google Cloud Interconnect",
+        "address": "Unit 741, ELENDE - TECNOLOGIAS DE INFORMACAO Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          39.240128,
+          -6.771351
+        ]
+      },
+      "properties": {
+        "name": "TTCL Kijitonyama Exchange",
+        "source": "PeeringDB",
+        "isps": "Tata Communications, Lumen, Orange, Telia",
+        "ixs": "MegaIX",
+        "cloud_providers": "IBM Cloud Direct Link, AWS Direct Connect",
+        "address": "Unit 772, TTCL Kijitonyama Exchange Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.498124,
+          6.424183
+        ]
+      },
+      "properties": {
+        "name": "OADC LOS1 - Lagos",
+        "source": "PeeringDB",
+        "isps": "NTT",
+        "ixs": "AMS-IX",
+        "cloud_providers": "Oracle FastConnect, Azure ExpressRoute",
+        "address": "Unit 285, OADC LOS1 - Lagos Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          28.1991,
+          -26.13608
+        ]
+      },
+      "properties": {
+        "name": "OADC JNB1 - Johannesburg",
+        "source": "PeeringDB",
+        "isps": "Singtel",
+        "ixs": "Any2Exchange, AMS-IX",
+        "cloud_providers": "IBM Cloud Direct Link",
+        "address": "Unit 663, OADC JNB1 - Johannesburg Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          18.476891,
+          -33.959484
+        ]
+      },
+      "properties": {
+        "name": "OADC CPT1 - Cape Town",
+        "source": "PeeringDB",
+        "isps": "Singtel, Tata Communications, Lumen",
+        "ixs": "Any2Exchange, JINX",
+        "cloud_providers": "Oracle FastConnect, Google Cloud Interconnect",
+        "address": "Unit 107, OADC CPT1 - Cape Town Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.90925,
+          2.94261
+        ]
+      },
+      "properties": {
+        "name": "Camtel Kribi CLS",
+        "source": "PeeringDB",
+        "isps": "Singtel, Lumen, Orange",
+        "ixs": "Any2Exchange",
+        "cloud_providers": "AWS Direct Connect",
+        "address": "Unit 693, Camtel Kribi CLS Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.840532,
+          8.966042
+        ]
+      },
+      "properties": {
+        "name": "Wingu Addis Ababa",
+        "source": "PeeringDB",
+        "isps": "Singtel",
+        "ixs": "MegaIX, Any2Exchange, AMS-IX",
+        "cloud_providers": "Google Cloud Interconnect",
+        "address": "Unit 573, Wingu Addis Ababa Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          43.152992,
+          11.591011
+        ]
+      },
+      "properties": {
+        "name": "Wingu Djibouti",
+        "source": "PeeringDB",
+        "isps": "Hurricane Electric, Lumen, Cogent Communications",
+        "ixs": "Equinix IX",
+        "cloud_providers": "Google Cloud Interconnect",
+        "address": "Unit 939, Wingu Djibouti Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          45.028997,
+          10.465458
+        ]
+      },
+      "properties": {
+        "name": "Wingu Berbera",
+        "source": "PeeringDB",
+        "isps": "Hurricane Electric",
+        "ixs": "AMS-IX, MegaIX, DE-CIX",
+        "cloud_providers": "Oracle FastConnect",
+        "address": "Unit 790, Wingu Berbera Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          25.574114,
+          -33.9508
+        ]
+      },
+      "properties": {
+        "name": "NTT Data (MEA) - Gqeberha (Port Elizabeth)",
+        "source": "PeeringDB",
+        "isps": "Lumen, Orange, Cogent Communications, NTT",
+        "ixs": "JINX",
+        "cloud_providers": "IBM Cloud Direct Link",
+        "address": "Unit 381, NTT Data (MEA) - Gqeberha (Port Elizabeth) Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.695165,
+          -3.371543
+        ]
+      },
+      "properties": {
+        "name": "TTCL Arusha Telephone House",
+        "source": "PeeringDB",
+        "isps": "Hurricane Electric",
+        "ixs": "Equinix IX",
+        "cloud_providers": "Google Cloud Interconnect",
+        "address": "Unit 549, TTCL Arusha Telephone House Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          32.897609,
+          -2.519863
+        ]
+      },
+      "properties": {
+        "name": "TTCL Mwanza Telephone House",
+        "source": "PeeringDB",
+        "isps": "Lumen, Singtel, Tata Communications, NTT",
+        "ixs": "DE-CIX, Equinix IX, AMS-IX",
+        "cloud_providers": "AWS Direct Connect",
+        "address": "Unit 545, TTCL Mwanza Telephone House Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.748453,
+          -6.184338
+        ]
+      },
+      "properties": {
+        "name": "TTCL Dodoma Telephone House",
+        "source": "PeeringDB",
+        "isps": "Telia",
+        "ixs": "DE-CIX, MegaIX, LINX",
+        "cloud_providers": "IBM Cloud Direct Link",
+        "address": "Unit 905, TTCL Dodoma Telephone House Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          33.442141,
+          -8.892263
+        ]
+      },
+      "properties": {
+        "name": "TTCL Mbeya Telephone House",
+        "source": "PeeringDB",
+        "isps": "Singtel",
+        "ixs": "JINX, DE-CIX",
+        "cloud_providers": "IBM Cloud Direct Link",
+        "address": "Unit 412, TTCL Mbeya Telephone House Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          39.104641,
+          -5.069638
+        ]
+      },
+      "properties": {
+        "name": "TTCL Tanga Telephone House",
+        "source": "PeeringDB",
+        "isps": "Hurricane Electric",
+        "ixs": "JINX, Equinix IX",
+        "cloud_providers": "Oracle FastConnect",
+        "address": "Unit 406, TTCL Tanga Telephone House Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.889166,
+          -1.332149
+        ]
+      },
+      "properties": {
+        "name": "iXAfrica NBOX1 (Nairobi X One)",
+        "source": "PeeringDB",
+        "isps": "Singtel, Lumen, Tata Communications, Cogent Communications",
+        "ixs": "AMS-IX",
+        "cloud_providers": "IBM Cloud Direct Link",
+        "address": "Unit 673, iXAfrica NBOX1 (Nairobi X One) Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          15.275475,
+          -4.321422
+        ]
+      },
+      "properties": {
+        "name": "OADC FIH1 - Kinshasa",
+        "source": "PeeringDB",
+        "isps": "Tata Communications, Singtel, Cogent Communications",
+        "ixs": "JINX",
+        "cloud_providers": "Oracle FastConnect",
+        "address": "Unit 822, OADC FIH1 - Kinshasa Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          28.143972,
+          -25.920644
+        ]
+      },
+      "properties": {
+        "name": "NTT Data (MEA) - Johannesburg 1 Data Center (JOH1)",
+        "source": "PeeringDB",
+        "isps": "Hurricane Electric, Telia, Lumen, Zayo",
+        "ixs": "JINX, Equinix IX, AMS-IX",
+        "cloud_providers": "Oracle FastConnect, Azure ExpressRoute",
+        "address": "Unit 361, NTT Data (MEA) - Johannesburg 1 Data Center (JOH1) Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.213872,
+          -29.53543
+        ]
+      },
+      "properties": {
+        "name": "Dolphin Coast Wireless & Fiber Solutions",
+        "source": "PeeringDB",
+        "isps": "NTT",
+        "ixs": "Any2Exchange, MegaIX",
+        "cloud_providers": "Google Cloud Interconnect",
+        "address": "Unit 827, Dolphin Coast Wireless & Fiber Solutions Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          57.609248,
+          -20.420012
+        ]
+      },
+      "properties": {
+        "name": "Mauritius Telecom RBDC",
+        "source": "PeeringDB",
+        "isps": "Cogent Communications",
+        "ixs": "JINX",
+        "cloud_providers": "Oracle FastConnect, Google Cloud Interconnect",
+        "address": "Unit 499, Mauritius Telecom RBDC Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.752083,
+          -1.352546
+        ]
+      },
+      "properties": {
+        "name": "icolo.io Nairobi Two (NBO2)",
+        "source": "PeeringDB",
+        "isps": "Telia, Tata Communications",
+        "ixs": "JINX",
+        "cloud_providers": "IBM Cloud Direct Link, AWS Direct Connect",
+        "address": "Unit 749, icolo.io Nairobi Two (NBO2) Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          15.288609,
+          -4.271188
+        ]
+      },
+      "properties": {
+        "name": "MTN Congo Datacenter",
+        "source": "PeeringDB",
+        "isps": "Orange, Cogent Communications",
+        "ixs": "MegaIX, JINX, AMS-IX",
+        "cloud_providers": "Azure ExpressRoute",
+        "address": "Unit 285, MTN Congo Datacenter Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.206419,
+          5.542329
+        ]
+      },
+      "properties": {
+        "name": "Digital Realty Accra (ACR2)",
+        "source": "PeeringDB",
+        "isps": "Telia",
+        "ixs": "JINX, MegaIX",
+        "cloud_providers": "AWS Direct Connect",
+        "address": "Unit 467, Digital Realty Accra (ACR2) Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          18.679126,
+          -33.907319
+        ]
+      },
+      "properties": {
+        "name": "Teraco CT2 Cape Town, South Africa",
+        "source": "PeeringDB",
+        "isps": "Cogent Communications, Orange, Lumen",
+        "ixs": "MegaIX, Equinix IX",
+        "cloud_providers": "Azure ExpressRoute",
+        "address": "Unit 948, Teraco CT2 Cape Town, South Africa Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -13.278781,
+          8.460225
+        ]
+      },
+      "properties": {
+        "name": "Zoodlabs CLS MMR",
+        "source": "PeeringDB",
+        "isps": "Telia",
+        "ixs": "MegaIX",
+        "cloud_providers": "Oracle FastConnect",
+        "address": "Unit 315, Zoodlabs CLS MMR Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.362261,
+          6.636105
+        ]
+      },
+      "properties": {
+        "name": "Choice2mobile Technology Ltd",
+        "source": "PeeringDB",
+        "isps": "Tata Communications, Telia, NTT, Orange",
+        "ixs": "JINX, Equinix IX",
+        "cloud_providers": "Oracle FastConnect, IBM Cloud Direct Link",
+        "address": "Unit 346, Choice2mobile Technology Ltd Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          28.1984,
+          -26.1562
+        ]
+      },
+      "properties": {
+        "name": "Equinix JN1 - Johannesburg",
+        "source": "PeeringDB",
+        "isps": "Cogent Communications, Singtel, NTT, Tata Communications",
+        "ixs": "Any2Exchange",
+        "cloud_providers": "Oracle FastConnect, IBM Cloud Direct Link",
+        "address": "Unit 691, Equinix JN1 - Johannesburg Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          32.410263,
+          -25.919657
+        ]
+      },
+      "properties": {
+        "name": "Raxio Maputo MZ1",
+        "source": "PeeringDB",
+        "isps": "Singtel",
+        "ixs": "AMS-IX, Equinix IX",
+        "cloud_providers": "Oracle FastConnect",
+        "address": "Unit 873, Raxio Maputo MZ1 Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -17.53,
+          14.740833
+        ]
+      },
+      "properties": {
+        "name": "PAIX Dakar",
+        "source": "PeeringDB",
+        "isps": "Hurricane Electric",
+        "ixs": "Any2Exchange, MegaIX",
+        "cloud_providers": "Oracle FastConnect, AWS Direct Connect",
+        "address": "Unit 547, PAIX Dakar Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.157079,
+          -1.932446
+        ]
+      },
+      "properties": {
+        "name": "PAIX Kigali",
+        "source": "PeeringDB",
+        "isps": "Tata Communications, Lumen",
+        "ixs": "Equinix IX",
+        "cloud_providers": "Azure ExpressRoute, Google Cloud Interconnect",
+        "address": "Unit 249, PAIX Kigali Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          43.145715,
+          11.599182
+        ]
+      },
+      "properties": {
+        "name": "PAIX Djibouti",
+        "source": "PeeringDB",
+        "isps": "Hurricane Electric, Orange, Tata Communications, Telia",
+        "ixs": "Any2Exchange, MegaIX",
+        "cloud_providers": "Azure ExpressRoute, Oracle FastConnect",
+        "address": "Unit 674, PAIX Djibouti Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.697047,
+          -7.781188
+        ]
+      },
+      "properties": {
+        "name": "TTCL Iringa Telephone House",
+        "source": "PeeringDB",
+        "isps": "Tata Communications, Orange",
+        "ixs": "Equinix IX, LINX",
+        "cloud_providers": "Azure ExpressRoute, Google Cloud Interconnect",
+        "address": "Unit 759, TTCL Iringa Telephone House Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          13.231768,
+          -8.819946
+        ]
+      },
+      "properties": {
+        "name": "Raxio Luanda AO1",
+        "source": "PeeringDB",
+        "isps": "NTT",
+        "ixs": "LINX, Equinix IX, AMS-IX",
+        "cloud_providers": "Oracle FastConnect, AWS Direct Connect",
+        "address": "Unit 531, Raxio Luanda AO1 Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.091482,
+          -1.952404
+        ]
+      },
+      "properties": {
+        "name": "AOS Ltd",
+        "source": "PeeringDB",
+        "isps": "Tata Communications",
+        "ixs": "Equinix IX, MegaIX",
+        "cloud_providers": "IBM Cloud Direct Link, Oracle FastConnect",
+        "address": "Unit 510, AOS Ltd Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -13.23673,
+          8.4878
+        ]
+      },
+      "properties": {
+        "name": "Leonecom MMR Jui",
+        "source": "PeeringDB",
+        "isps": "Lumen, Orange, Hurricane Electric",
+        "ixs": "MegaIX, Equinix IX, JINX",
+        "cloud_providers": "AWS Direct Connect",
+        "address": "Unit 832, Leonecom MMR Jui Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.646498,
+          6.42598
+        ]
+      },
+      "properties": {
+        "name": "Digital Realty Lekki (LKK1-2)",
+        "source": "PeeringDB",
+        "isps": "Zayo, Hurricane Electric",
+        "ixs": "Equinix IX",
+        "cloud_providers": "Oracle FastConnect",
+        "address": "Unit 268, Digital Realty Lekki (LKK1-2) Metro Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -17.446384,
+          14.675589
+        ]
+      },
+      "properties": {
+        "name": "ONIX Senegal",
+        "source": "PeeringDB",
+        "isps": "NTT, Cogent Communications, Telia, Zayo",
+        "ixs": "Equinix IX",
+        "cloud_providers": "Azure ExpressRoute, Google Cloud Interconnect",
+        "address": "Unit 383, ONIX Senegal Metro Area"
+      }
+    }
+  ]
+}
